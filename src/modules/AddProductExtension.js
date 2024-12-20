@@ -6,6 +6,7 @@ class AddProductExtension {
         this.regularPrice = $('#_regular_price');
         this.salePrice = $('#_sale_price');
         this.gtinInput = $('input[name="_mvx_gtin_code"]');
+        this.productTitleSection = $('.product-title-wrap');
         this.events();
     }
 
@@ -36,7 +37,21 @@ class AddProductExtension {
                     'ISBNEntered' : Number(isbnEntered)
                 },
                 success: (response) => {
-                    console.log(response);
+                    if (response > 0){
+                        if ($('#tomc-vendxtend--dupliacteISBNError').length < 1) {
+                            let alertMessage = $('<p />').attr('id', 'tomc-vendxtend--dupliacteISBNError');
+                            this.productTitleSection.append(alertMessage);
+                        }
+                        $('#tomc-vendxtend--dupliacteISBNError').html('Our records show that the ISBN you entered, ' + response + ', is already registered to an existing product.');
+                        this.gtinInput.val('');
+                    } else {
+                        console.log(response);
+                        if ($('#tomc-vendxtend--dupliacteISBNError').length < 1) {
+                            let alertMessage = $('<p />').attr('id', 'tomc-vendxtend--dupliacteISBNError');
+                            this.productTitleSection.append(alertMessage);
+                        }
+                        $('#tomc-vendxtend--dupliacteISBNError').html('');
+                    }
                 },
                 failure: (response) => {
                     // console.log(response);

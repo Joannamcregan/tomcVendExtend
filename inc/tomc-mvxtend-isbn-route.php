@@ -16,10 +16,10 @@ function checkIfAssigned($data){
         $userId = get_current_user_id();
         global $wpdb;
         $isbn_numbers_table = $wpdb->prefix . "tomc_isbn_numbers";
-        $query = 'select assignedproductid from %i where isbn = %d';
+        $query = 'select isbn from %i where isbn = %d and shoporderid is not null;';
         $results = $wpdb->get_results($wpdb->prepare($query, $isbn_numbers_table, $ISBNEntered), ARRAY_A);
         if (($results) && count($results) > 0){
-            return $results[0]['assignedproductid'];
+            return $results[0]['isbn'];
         } else {
             return 0;
         }

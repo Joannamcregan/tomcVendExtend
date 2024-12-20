@@ -21,6 +21,7 @@ class AddProductExtension {
     this.regularPrice = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#_regular_price');
     this.salePrice = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#_sale_price');
     this.gtinInput = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="_mvx_gtin_code"]');
+    this.productTitleSection = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.product-title-wrap');
     this.events();
   }
   events() {
@@ -48,7 +49,21 @@ class AddProductExtension {
           'ISBNEntered': Number(isbnEntered)
         },
         success: response => {
-          console.log(response);
+          if (response > 0) {
+            if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-vendxtend--dupliacteISBNError').length < 1) {
+              let alertMessage = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<p />').attr('id', 'tomc-vendxtend--dupliacteISBNError');
+              this.productTitleSection.append(alertMessage);
+            }
+            jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-vendxtend--dupliacteISBNError').html('Our records show that the ISBN you entered, ' + response + ', is already registered to an existing product.');
+            this.gtinInput.val('');
+          } else {
+            console.log(response);
+            if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-vendxtend--dupliacteISBNError').length < 1) {
+              let alertMessage = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<p />').attr('id', 'tomc-vendxtend--dupliacteISBNError');
+              this.productTitleSection.append(alertMessage);
+            }
+            jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-vendxtend--dupliacteISBNError').html('');
+          }
         },
         failure: response => {
           // console.log(response);
