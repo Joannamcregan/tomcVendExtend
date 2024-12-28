@@ -2,7 +2,6 @@ import $ from 'jquery';
 
 class AddProductExtension {
     constructor() {
-        this.mvxSubmit = $('#mvx_frontend_dashboard_product_submit');
         this.titleInput = $('input#post_title');
         this.productDescription = $('#tinymce p');
         this.scheduleSaleButton = $(".sale_schedule");
@@ -28,15 +27,23 @@ class AddProductExtension {
         this.regularPrice.on('focusout', this.checkPrices.bind(this));
         this.downloadableCheckbox.on('change', this.updateCheckboxesDownloadable.bind(this));
         this.virtualCheckbox.on('change', this.updateCheckboxesVirtual.bind(this));
-        this.mvxSubmit.on('click', { prepend: true}, this.validateProductInfo.bind(this));
+        this.serviceCatCheckbox.on('change', this.updateCheckboxesService.bind(this));
     }
 
-    validateProductInfo() {
-        if (this.titleInput.val() == ''){
-            alert('Give your product a title.');
-        }
-        if ((this.virtualCheckbox.is(":checked") || this.serviceCatCheckbox.is(":checked")) && this.productDescription.text() == ''){
-            alert('Add a description for your service.');
+    updateCheckboxesService() {
+        if (this.serviceCatCheckbox.is(":checked")){
+            this.virtualCheckbox.prop('checked', true);
+            this.downloadableCheckbox.prop('checked', false);
+            this.paperbackCatCheckbox.prop('checked', false);
+            this.hardcoverCatCheckbox.prop('checked', false);
+            this.uncategorizedCatCheckbox.prop('checked', false);
+            this.ebookCatCheckbox.prop('checked', false);
+            this.audiobookCatCheckbox.prop('checked', false);
+            if (this.productDescription.text() == ''){
+                alert('Give your service a description.');
+            }
+        } else {
+            this.virtualCheckbox.prop('checked', false);
         }
     }
 
@@ -62,6 +69,9 @@ class AddProductExtension {
             this.uncategorizedCatCheckbox.prop('checked', false);
             this.ebookCatCheckbox.prop('checked', false);
             this.audiobookCatCheckbox.prop('checked', false);
+            if (this.productDescription.text() == ''){
+                alert('Give your service a description.');
+            }
         } else {
             this.serviceCatCheckbox.prop('checked', false);
         }
