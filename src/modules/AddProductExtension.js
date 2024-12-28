@@ -2,38 +2,83 @@ import $ from 'jquery';
 
 class AddProductExtension {
     constructor() {
+        this.mvxSubmit = $('#mvx_frontend_dashboard_product_submit');
+        this.titleInput = $('input#post_title');
+        this.productDescription = $('#tinymce p');
         this.scheduleSaleButton = $(".sale_schedule");
         this.regularPrice = $('#_regular_price');
         this.salePrice = $('#_sale_price');
         this.gtinInput = $('input[name="_mvx_gtin_code"]');
         this.productTitleSection = $('.product-title-wrap');
-        this.serviceCheckbox = $('ul.taxonomy-widget input[value=53]');
+        this.virtualCheckbox = $('input#_virtual');
+        this.downloadableCheckbox = $('input#_downloadable');
+        this.serviceCatCheckbox = $('ul.product_cat input[value=53]'); //somehow also 53 for prod
+        this.paperbackCatCheckbox = $('ul.product_cat input[value=60]'); //52 for prod
+        this.hardcoverCatCheckbox = $('ul.product_cat input[value=59]'); //51 for prod
+        this.ebookCatCheckbox = $('ul.product_cat input[value=51]'); //49 for prod
+        this.audiobookCatCheckbox = $('ul.product_cat input[value=52]'); //50 for prod
+        this.uncategorizedCatCheckbox = $('ul.product_cat input[value=16]'); //somehow also 16 for prod
+        this.catCheckboxes = $('ul.product_cat input[type=checkbox]');
         this.events();
     }
 
     events(){
-        this.scheduleSaleButton.on('click', this.checkPrices.bind(this));
+        this.scheduleSaleButton.on('click', this.checkSalesPrices.bind(this));
         this.gtinInput.on('focusout', this.checkIsbn.bind(this));
-        this.regularPrice.on('focusout', this.checkForHighPrice.bind(this));
+        this.regularPrice.on('focusout', this.checkPrices.bind(this));
+        this.downloadableCheckbox.on('change', this.updateCheckboxesDownloadable.bind(this));
+        this.virtualCheckbox.on('change', this.updateCheckboxesVirtual.bind(this));
+        this.mvxSubmit.on('click', { prepend: true}, this.validateProductInfo.bind(this));
     }
 
-    checkForHighPrice() {
-        if (this.regularPrice.val() === ''){
-            alert('Be sure to enter a price.');
-        } else if (Number(this.regularPrice.val()) === 0) {
-            alert("You made your product free, which is awesome, but make sure that's what you intended to do before proceeding.")
-        } else if (isNaN(this.regularPrice.val())){
-            alert("Your product's price must be a number.");
-            this.regularPrice.val('');
-        } else if (Number(this.regularPrice.val()) > 9500){
-            alert("You set the price at $" + this.regularPrice.val() + ', which is more than the $9500 limit.');
-            this.regularPrice.val('');
-        } else if (Number(this.regularPrice.val()) > 50 && !(this.serviceCheckbox.is(":checked"))){
-            alert('You set the price at $' + this.regularPrice.val() + ". Make sure that's the right amount before proceeding (and be sure to check the 'Services' box if you're offering a service).");
+    validateProductInfo() {
+        if (this.titleInput.val() == ''){
+            alert('Give your product a title.');
+        }
+        if ((this.virtualCheckbox.is(":checked") || this.serviceCatCheckbox.is(":checked")) && this.productDescription.text() == ''){
+            alert('Add a description for your service.');
         }
     }
 
-    checkPrices() {  
+    updateCheckboxesDownloadable() {
+        if (this.downloadableCheckbox.is(":checked")) {
+            this.virtualCheckbox.prop('checked', false);
+            this.serviceCatCheckbox.prop('checked', false);
+            this.paperbackCatCheckbox.prop('checked', false);
+            this.hardcoverCatCheckbox.prop('checked', false);
+            this.uncategorizedCatCheckbox.prop('checked', false);
+        } else {
+            this.ebookCatCheckbox.prop('checked', false);
+            this.audiobookCatCheckbox.prop('checked', false);
+        }
+    }
+
+    updateCheckboxesVirtual() {
+        if (this.virtualCheckbox.is(":checked")) {
+            this.downloadableCheckbox.prop('checked', false);
+            this.serviceCatCheckbox.prop('checked', true);
+            this.paperbackCatCheckbox.prop('checked', false);
+            this.hardcoverCatCheckbox.prop('checked', false);
+            this.uncategorizedCatCheckbox.prop('checked', false);
+            this.ebookCatCheckbox.prop('checked', false);
+            this.audiobookCatCheckbox.prop('checked', false);
+        } else {
+            this.serviceCatCheckbox.prop('checked', false);
+        }
+    }
+
+    checkPrices() {
+        if (this.regularPrice.val() === ''){
+            alert('Be sure to enter a price.');
+        } else if (isNaN(this.regularPrice.val())){
+            alert("Your product's price must be a number.");
+            this.regularPrice.val('');
+        } else if (Number(this.regularPrice.val()) > 50 && !(this.virtualCheckbox.is(":checked"))){
+            alert('You set the price at $' + this.regularPrice.val() + ". Make sure that's the right amount before proceeding.");
+        }
+    }
+
+    checkSalesPrices() {  
         if (this.regularPrice.val() === '' || this.salePrice.val() === ''){
             alert('To schedule a sale, enter a value for the regular price and sale price.');
         }
