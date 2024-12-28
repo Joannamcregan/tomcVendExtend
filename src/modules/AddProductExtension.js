@@ -7,17 +7,33 @@ class AddProductExtension {
         this.salePrice = $('#_sale_price');
         this.gtinInput = $('input[name="_mvx_gtin_code"]');
         this.productTitleSection = $('.product-title-wrap');
+        this.serviceCheckbox = $('ul.taxonomy-widget input[value=53]');
         this.events();
     }
 
     events(){
         this.scheduleSaleButton.on('click', this.checkPrices.bind(this));
         this.gtinInput.on('focusout', this.checkIsbn.bind(this));
+        this.regularPrice.on('focusout', this.checkForHighPrice.bind(this));
+    }
+
+    checkForHighPrice() {
+        if (this.regularPrice.val() === ''){
+            alert('Be sure to enter a price.');
+        } else if (isNaN(this.regularPrice.val())){
+            alert("Your product's price must be a number.");
+            this.regularPrice.val('');
+        } else if (Number(this.regularPrice.val()) > 9500){
+            alert("You set the price at $" + this.regularPrice.val() + ', which is more than the $9500 limit.');
+            this.regularPrice.val('');
+        } else if (Number(this.regularPrice.val()) > 50 && !(this.serviceCheckbox.is(":checked"))){
+            alert('You set the price at $' + this.regularPrice.val() + ". Make sure that's the right amount before proceeding (and be sure to check the 'Services' box if you're offering a service).");
+        }
     }
 
     checkPrices() {  
         if (this.regularPrice.val() === '' || this.salePrice.val() === ''){
-            alert('To schedule a sale, enter a value for the regular price and sale price.')
+            alert('To schedule a sale, enter a value for the regular price and sale price.');
         }
         if (Number(this.salePrice.val()) >= Number(this.regularPrice.val())){
             alert('Make sure your sale price is less than the regular price.');

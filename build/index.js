@@ -22,11 +22,26 @@ class AddProductExtension {
     this.salePrice = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#_sale_price');
     this.gtinInput = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="_mvx_gtin_code"]');
     this.productTitleSection = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.product-title-wrap');
+    this.serviceCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.taxonomy-widget input[value=53]');
     this.events();
   }
   events() {
     this.scheduleSaleButton.on('click', this.checkPrices.bind(this));
     this.gtinInput.on('focusout', this.checkIsbn.bind(this));
+    this.regularPrice.on('focusout', this.checkForHighPrice.bind(this));
+  }
+  checkForHighPrice() {
+    if (this.regularPrice.val() === '') {
+      alert('Be sure to enter a price.');
+    } else if (isNaN(this.regularPrice.val())) {
+      alert("Your product's price must be a number.");
+      this.regularPrice.val('');
+    } else if (Number(this.regularPrice.val()) > 9500) {
+      alert("You set the price at $" + this.regularPrice.val() + ', which is more than the $9500 limit.');
+      this.regularPrice.val('');
+    } else if (Number(this.regularPrice.val()) > 50 && !this.serviceCheckbox.is(":checked")) {
+      alert('You set the price at $' + this.regularPrice.val() + ". Make sure that's the right amount before proceeding (and be sure to check the 'Services' box if you're offering a service).");
+    }
   }
   checkPrices() {
     if (this.regularPrice.val() === '' || this.salePrice.val() === '') {
