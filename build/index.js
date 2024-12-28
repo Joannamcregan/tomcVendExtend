@@ -33,6 +33,8 @@ class AddProductExtension {
   checkForHighPrice() {
     if (this.regularPrice.val() === '') {
       alert('Be sure to enter a price.');
+    } else if (Number(this.regularPrice.val()) === 0) {
+      alert("You made your product free, which is awesome, but make sure that's what you intended to do before proceeding.");
     } else if (isNaN(this.regularPrice.val())) {
       alert("Your product's price must be a number.");
       this.regularPrice.val('');
