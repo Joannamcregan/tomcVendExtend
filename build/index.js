@@ -67,7 +67,7 @@ class AddProductExtension {
     }
   }
   updateCheckboxesHardcover() {
-    if (this.paperbackCatCheckbox.is(":checked")) {
+    if (this.hardcoverCatCheckbox.is(":checked")) {
       this.virtualCheckbox.prop('checked', false);
       this.downloadableCheckbox.prop('checked', false);
       this.paperbackCatCheckbox.prop('checked', false);
