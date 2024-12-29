@@ -48,6 +48,7 @@ class AddProductExtension {
     this.paperbackCatCheckbox.on('change', this.updateCheckboxesPaperback.bind(this));
     this.hardcoverCatCheckbox.on('change', this.updateCheckboxesHardcover.bind(this));
     this.ebookCatCheckbox.on('change', this.updateCheckboxesEbook.bind(this));
+    this.audiobookCatCheckbox.on('change', this.updateCheckboxesAudiobook.bind(this));
   }
   updateCheckboxesService() {
     if (this.serviceCatCheckbox.is(":checked")) {
@@ -112,6 +113,19 @@ class AddProductExtension {
       this.uncategorizedCatCheckbox.prop('checked', false);
       this.serviceCatCheckbox.prop('checked', false);
       this.audiobookCatCheckbox.prop('checked', false);
+    } else {
+      this.downloadableCheckbox.prop('checked', false);
+    }
+  }
+  updateCheckboxesAudiobook() {
+    if (this.audiobookCatCheckbox.is(":checked")) {
+      this.virtualCheckbox.prop('checked', false);
+      this.downloadableCheckbox.prop('checked', true);
+      this.paperbackCatCheckbox.prop('checked', false);
+      this.hardcoverCatCheckbox.prop('checked', false);
+      this.uncategorizedCatCheckbox.prop('checked', false);
+      this.serviceCatCheckbox.prop('checked', false);
+      this.ebookCatCheckbox.prop('checked', false);
     } else {
       this.downloadableCheckbox.prop('checked', false);
     }
