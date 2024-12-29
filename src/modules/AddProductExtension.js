@@ -14,12 +14,12 @@ class AddProductExtension {
         this.productTitleSection = $('.product-title-wrap');
         this.virtualCheckbox = $('input#_virtual');
         this.downloadableCheckbox = $('input#_downloadable');
-        this.serviceCatCheckbox = $('ul.product_cat input[value=53]'); //somehow also 53 for prod
-        this.paperbackCatCheckbox = $('ul.product_cat input[value=60]'); //52 for prod
-        this.hardcoverCatCheckbox = $('ul.product_cat input[value=59]'); //51 for prod
-        this.ebookCatCheckbox = $('ul.product_cat input[value=51]'); //49 for prod
-        this.audiobookCatCheckbox = $('ul.product_cat input[value=52]'); //50 for prod
-        this.uncategorizedCatCheckbox = $('ul.product_cat input[value=16]'); //somehow also 16 for prod
+        this.serviceCatCheckbox = $('ul.product_cat input[value=53]'); //53 for dev, somehow also 53 for prod
+        this.paperbackCatCheckbox = $('ul.product_cat input[value=52]'); //60 for dev, 52 for prod
+        this.hardcoverCatCheckbox = $('ul.product_cat input[value=51]'); //59 for dev, 51 for prod
+        this.ebookCatCheckbox = $('ul.product_cat input[value=49]'); //51 for dev, 49 for prod
+        this.audiobookCatCheckbox = $('ul.product_cat input[value=50]'); //52 for dev, 50 for prod
+        this.uncategorizedCatCheckbox = $('ul.product_cat input[value=16]'); //16 for dev, somehow also 16 for prod
         this.catCheckboxes = $('ul.product_cat input[type=checkbox]');
         this.events();
     }
