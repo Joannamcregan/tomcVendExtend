@@ -7,6 +7,9 @@ class AddProductExtension {
         this.scheduleSaleButton = $(".sale_schedule");
         this.regularPrice = $('#_regular_price');
         this.salePrice = $('#_sale_price');
+        this.manageStockCheckbox = $('input#_manage_stock');
+        this.stockFieldGroup = $('div.stock_fields');
+        this.stockInput = $('input#_stock');
         this.gtinInput = $('input[name="_mvx_gtin_code"]');
         this.productTitleSection = $('.product-title-wrap');
         this.virtualCheckbox = $('input#_virtual');
@@ -28,6 +31,8 @@ class AddProductExtension {
         this.downloadableCheckbox.on('change', this.updateCheckboxesDownloadable.bind(this));
         this.virtualCheckbox.on('change', this.updateCheckboxesVirtual.bind(this));
         this.serviceCatCheckbox.on('change', this.updateCheckboxesService.bind(this));
+        this.paperbackCatCheckbox.on('change', this.updateCheckboxesPaperback.bind(this));
+        this.hardcoverCatCheckbox.on('change', this.updateCheckboxesHardcover.bind(this));
     }
 
     updateCheckboxesService() {
@@ -44,6 +49,46 @@ class AddProductExtension {
             }
         } else {
             this.virtualCheckbox.prop('checked', false);
+        }
+    }
+
+    updateCheckboxesHardcover() {
+        if (this.paperbackCatCheckbox.is(":checked")){
+            this.virtualCheckbox.prop('checked', false);
+            this.downloadableCheckbox.prop('checked', false);
+            this.paperbackCatCheckbox.prop('checked', false);
+            this.uncategorizedCatCheckbox.prop('checked', false);
+            this.ebookCatCheckbox.prop('checked', false);
+            this.audiobookCatCheckbox.prop('checked', false);
+            this.manageStockCheckbox.prop('checked', true);
+            this.stockFieldGroup.css('display', 'block');
+            if (this.stockInput.val() == '' || Number(this.stockInput.val()) == 0 || isNaN(this.stockInput.val())){
+                alert('Enter the number of paperbacks you have ready to ship in the Stock field on the Inventory tab.');
+                this.stockInput.val(0);
+            }
+        } else {
+            this.manageStockCheckbox.prop('checked', false);
+            this.stockFieldGroup.css('display', 'none');
+        }
+    }
+
+    updateCheckboxesPaperback() {
+        if (this.paperbackCatCheckbox.is(":checked")){
+            this.virtualCheckbox.prop('checked', false);
+            this.downloadableCheckbox.prop('checked', false);
+            this.hardcoverCatCheckbox.prop('checked', false);
+            this.uncategorizedCatCheckbox.prop('checked', false);
+            this.ebookCatCheckbox.prop('checked', false);
+            this.audiobookCatCheckbox.prop('checked', false);
+            this.manageStockCheckbox.prop('checked', true);
+            this.stockFieldGroup.css('display', 'block');
+            if (this.stockInput.val() == '' || Number(this.stockInput.val()) == 0 || isNaN(this.stockInput.val())){
+                alert('Enter the number of paperbacks you have ready to ship in the Stock field on the Inventory tab.');
+                this.stockInput.val(0);
+            }
+        } else {
+            this.manageStockCheckbox.prop('checked', false);
+            this.stockFieldGroup.css('display', 'none');
         }
     }
 
