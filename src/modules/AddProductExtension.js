@@ -3,8 +3,6 @@ import $ from 'jquery';
 class AddProductExtension {
     constructor() {
         this.mvxSubmit = $('input#mvx_frontend_dashboard_product_submit');
-        this.breadcrumbSection = $('ul.mvx-breadcrumb');
-        this.productTitleWrap = $('div.product-title-wrap');
         this.titleInput = $('input#post_title');
         this.productDescription = $('#tinymce p');
         this.scheduleSaleButton = $(".sale_schedule");
@@ -38,6 +36,11 @@ class AddProductExtension {
         this.hardcoverCatCheckbox.on('change', this.updateCheckboxesHardcover.bind(this));
         this.ebookCatCheckbox.on('change', this.updateCheckboxesEbook.bind(this));
         this.audiobookCatCheckbox.on('change', this.updateCheckboxesAudiobook.bind(this));
+        this.mvxSubmit.on('click', this.showWaitMessage.bind(this));
+    }
+
+    showWaitMessage() {
+        $('#tomc-mvx--add-product-wait-message').css('display', 'block');
     }
 
     updateCheckboxesService() {

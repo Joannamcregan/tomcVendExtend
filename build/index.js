@@ -18,8 +18,6 @@ __webpack_require__.r(__webpack_exports__);
 class AddProductExtension {
   constructor() {
     this.mvxSubmit = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input#mvx_frontend_dashboard_product_submit');
-    this.breadcrumbSection = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.mvx-breadcrumb');
-    this.productTitleWrap = jquery__WEBPACK_IMPORTED_MODULE_0___default()('div.product-title-wrap');
     this.titleInput = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input#post_title');
     this.productDescription = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tinymce p');
     this.scheduleSaleButton = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".sale_schedule");
@@ -52,6 +50,10 @@ class AddProductExtension {
     this.hardcoverCatCheckbox.on('change', this.updateCheckboxesHardcover.bind(this));
     this.ebookCatCheckbox.on('change', this.updateCheckboxesEbook.bind(this));
     this.audiobookCatCheckbox.on('change', this.updateCheckboxesAudiobook.bind(this));
+    this.mvxSubmit.on('click', this.showWaitMessage.bind(this));
+  }
+  showWaitMessage() {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-mvx--add-product-wait-message').css('display', 'block');
   }
   updateCheckboxesService() {
     if (this.serviceCatCheckbox.is(":checked")) {
