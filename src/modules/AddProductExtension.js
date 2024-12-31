@@ -2,6 +2,9 @@ import $ from 'jquery';
 
 class AddProductExtension {
     constructor() {
+        this.mvxSubmit = $('input#mvx_frontend_dashboard_product_submit');
+        this.breadcrumbSection = $('ul.mvx-breadcrumb');
+        this.productTitleWrap = $('div.product-title-wrap');
         this.titleInput = $('input#post_title');
         this.productDescription = $('#tinymce p');
         this.scheduleSaleButton = $(".sale_schedule");
