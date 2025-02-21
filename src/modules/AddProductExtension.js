@@ -199,7 +199,6 @@ class AddProductExtension {
                         $('#tomc-vendxtend--dupliacteISBNError').html('Our records show that the ISBN you entered, ' + response + ', is already registered to an existing product.');
                         this.gtinInput.val('');
                     } else {
-                        console.log(response);
                         if ($('#tomc-vendxtend--dupliacteISBNError').length < 1) {
                             let alertMessage = $('<p />').attr('id', 'tomc-vendxtend--dupliacteISBNError');
                             this.productTitleSection.append(alertMessage);
