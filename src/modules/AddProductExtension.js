@@ -22,7 +22,10 @@ class AddProductExtension {
         this.audiobookCatCheckbox = $('ul.product_cat input[value=50]'); //52 for dev, 50 for prod
         this.uncategorizedCatCheckbox = $('ul.product_cat input[value=16]'); //16 for dev, somehow also 16 for prod
         this.catCheckboxes = $('ul.product_cat input[type=checkbox]');
+        this.taxStatusDropdown = $('#_tax_status');
+        this.taxClassDropdown = $('#_tax_class');
         this.events();
+        this.taxClass = '';
     }
 
     events(){
@@ -135,6 +138,9 @@ class AddProductExtension {
             this.paperbackCatCheckbox.prop('checked', false);
             this.hardcoverCatCheckbox.prop('checked', false);
             this.uncategorizedCatCheckbox.prop('checked', false);
+            this.taxClass = 'digital-and-virtual-products';
+            this.taxClassDropdown.val('digital-and-virtual-products');
+            console.log(this.taxClass);
         } else {
             this.ebookCatCheckbox.prop('checked', false);
             this.audiobookCatCheckbox.prop('checked', false);

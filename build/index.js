@@ -37,7 +37,10 @@ class AddProductExtension {
     this.audiobookCatCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=50]'); //52 for dev, 50 for prod
     this.uncategorizedCatCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=16]'); //16 for dev, somehow also 16 for prod
     this.catCheckboxes = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[type=checkbox]');
+    this.taxStatusDropdown = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#_tax_status');
+    this.taxClassDropdown = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#_tax_class');
     this.events();
+    this.taxClass = '';
   }
   events() {
     this.scheduleSaleButton.on('click', this.checkSalesPrices.bind(this));
@@ -142,6 +145,9 @@ class AddProductExtension {
       this.paperbackCatCheckbox.prop('checked', false);
       this.hardcoverCatCheckbox.prop('checked', false);
       this.uncategorizedCatCheckbox.prop('checked', false);
+      this.taxClass = 'digital-and-virtual-products';
+      this.taxClassDropdown.val('digital-and-virtual-products');
+      console.log(this.taxClass);
     } else {
       this.ebookCatCheckbox.prop('checked', false);
       this.audiobookCatCheckbox.prop('checked', false);
