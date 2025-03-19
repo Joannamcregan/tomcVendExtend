@@ -25,7 +25,6 @@ class AddProductExtension {
         this.taxStatusDropdown = $('#_tax_status');
         this.taxClassDropdown = $('#_tax_class');
         this.events();
-        this.taxClass = '';
     }
 
     events(){
@@ -45,7 +44,11 @@ class AddProductExtension {
     }
 
     resetTaxClass() {
-        this.taxClassDropdown.val(this.taxClass);
+        if (this.downloadableCheckbox.is(":checked") || this.virtualCheckbox.is(":checked")){
+            this.taxClassDropdown.val('digital-and-virtual-products');
+        } else {
+            this.taxClassDropdown.val('physical-products');
+        }
         alert('Tax class is determined by product type.');
     }
 
@@ -70,7 +73,6 @@ class AddProductExtension {
             if (this.productDescription.text() == ''){
                 alert('Give your service a description.');
             }
-            this.taxClass = 'digital-and-virtual-products';
             this.taxClassDropdown.val('digital-and-virtual-products');
             this.taxStatusDropdown.val('taxable');
         } else {
@@ -92,7 +94,6 @@ class AddProductExtension {
                 alert('Enter the number of paperbacks you have ready to ship in the Stock field on the Inventory tab.');
                 this.stockInput.val(0);
             }
-            this.taxClass = 'physical-products';
             this.taxClassDropdown.val('physical-products');
             this.taxStatusDropdown.val('taxable');
         } else {
@@ -115,7 +116,6 @@ class AddProductExtension {
                 alert('Enter the number of paperbacks you have ready to ship in the Stock field on the Inventory tab.');
                 this.stockInput.val(0);
             }
-            this.taxClass = 'physical-products';
             this.taxClassDropdown.val('physical-products');
             this.taxStatusDropdown.val('taxable');
         } else {
@@ -133,7 +133,6 @@ class AddProductExtension {
             this.uncategorizedCatCheckbox.prop('checked', false);
             this.serviceCatCheckbox.prop('checked', false);
             this.audiobookCatCheckbox.prop('checked', false);
-            this.taxClass = 'digital-and-virtual-products';
             this.taxClassDropdown.val('digital-and-virtual-products');
             this.taxStatusDropdown.val('taxable');
         } else {
@@ -150,7 +149,6 @@ class AddProductExtension {
             this.uncategorizedCatCheckbox.prop('checked', false);
             this.serviceCatCheckbox.prop('checked', false);
             this.ebookCatCheckbox.prop('checked', false);
-            this.taxClass = 'digital-and-virtual-products';
             this.taxClassDropdown.val('digital-and-virtual-products');
             this.taxStatusDropdown.val('taxable');
         } else {
@@ -165,13 +163,11 @@ class AddProductExtension {
             this.paperbackCatCheckbox.prop('checked', false);
             this.hardcoverCatCheckbox.prop('checked', false);
             this.uncategorizedCatCheckbox.prop('checked', false);
-            this.taxClass = 'digital-and-virtual-products';
             this.taxClassDropdown.val('digital-and-virtual-products');
             this.taxStatusDropdown.val('taxable');
         } else {
             this.ebookCatCheckbox.prop('checked', false);
             this.audiobookCatCheckbox.prop('checked', false);
-            this.taxClass = 'physical-products';
             this.taxClassDropdown.val('physical-products');
             this.taxStatusDropdown.val('taxable');
         }
@@ -189,12 +185,10 @@ class AddProductExtension {
             if (this.productDescription.text() == ''){
                 alert('Give your service a description.');
             }
-            this.taxClass = 'digital-and-virtual-products';
             this.taxClassDropdown.val('digital-and-virtual-products');
             this.taxStatusDropdown.val('taxable');
         } else {
             this.serviceCatCheckbox.prop('checked', false);
-            this.taxClass = 'physical-products';
             this.taxClassDropdown.val('physical-products');
             this.taxStatusDropdown.val('taxable');
         }
