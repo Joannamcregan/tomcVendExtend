@@ -46,7 +46,12 @@ class AddProductExtension {
     }
 
     setTaxInfo() {
-        console.log('called');
+        if (this.downloadableCheckbox.is(":checked") || this.virtualCheckbox.is(":checked")){
+            this.taxClassDropdown.val('digital-and-virtual-products');
+        } else {
+            this.taxClassDropdown.val('physical-products');
+        }
+        this.taxStatusDropdown.val('taxable');
     }
 
     resetTaxClass() {
