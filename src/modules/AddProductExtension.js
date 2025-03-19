@@ -40,6 +40,16 @@ class AddProductExtension {
         this.ebookCatCheckbox.on('change', this.updateCheckboxesEbook.bind(this));
         this.audiobookCatCheckbox.on('change', this.updateCheckboxesAudiobook.bind(this));
         this.mvxSubmit.on('click', this.showWaitMessage.bind(this));
+        this.taxStatusDropdown.on('change', this.resetTaxStatus.bind(this));
+        this.taxClassDropdown.on('change', this.resetTaxClass.bind(this));
+    }
+
+    resetTaxClass() {
+        this.taxClassDropdown.val(this.taxClass);
+    }
+
+    resetTaxStatus() {
+        this.taxStatusDropdown.val('taxable');
     }
 
     showWaitMessage() {
