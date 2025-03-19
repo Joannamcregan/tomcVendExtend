@@ -59,9 +59,11 @@ class AddProductExtension {
   }
   resetTaxClass() {
     this.taxClassDropdown.val(this.taxClass);
+    alert('Tax class is determined by product type.');
   }
   resetTaxStatus() {
     this.taxStatusDropdown.val('taxable');
+    alert('Tax status must be set to Taxable.');
   }
   showWaitMessage() {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-mvx--add-product-wait-message').css('display', 'block');

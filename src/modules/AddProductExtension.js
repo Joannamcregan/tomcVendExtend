@@ -46,10 +46,12 @@ class AddProductExtension {
 
     resetTaxClass() {
         this.taxClassDropdown.val(this.taxClass);
+        alert('Tax class is determined by product type.');
     }
 
     resetTaxStatus() {
         this.taxStatusDropdown.val('taxable');
+        alert('Tax status must be set to Taxable.');
     }
 
     showWaitMessage() {
