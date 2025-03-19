@@ -24,6 +24,7 @@ class AddProductExtension {
         this.catCheckboxes = $('ul.product_cat input[type=checkbox]');
         this.taxStatusDropdown = $('#_tax_status');
         this.taxClassDropdown = $('#_tax_class');
+        this.titleInput = $('span.editing').find('input#post_title');
         this.events();
     }
 
@@ -41,6 +42,11 @@ class AddProductExtension {
         this.mvxSubmit.on('click', this.showWaitMessage.bind(this));
         this.taxStatusDropdown.on('change', this.resetTaxStatus.bind(this));
         this.taxClassDropdown.on('change', this.resetTaxClass.bind(this));
+        this.titleInput.on('click', this.setTaxInfo.bind(this));
+    }
+
+    setTaxInfo() {
+        console.log('called');
     }
 
     resetTaxClass() {
