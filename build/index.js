@@ -39,7 +39,7 @@ class AddProductExtension {
     this.catCheckboxes = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[type=checkbox]');
     this.taxStatusDropdown = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#_tax_status');
     this.taxClassDropdown = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#_tax_class');
-    this.titleInput = jquery__WEBPACK_IMPORTED_MODULE_0___default()('span.editing').find('input#post_title');
+    this.titleInput = jquery__WEBPACK_IMPORTED_MODULE_0___default()('span.editing').find('#post_title');
     this.events();
   }
   events() {
