@@ -24,7 +24,7 @@ class AddProductExtension {
         this.catCheckboxes = $('ul.product_cat input[type=checkbox]');
         this.taxStatusDropdown = $('#_tax_status');
         this.taxClassDropdown = $('#_tax_class');
-        this.titleInput = $('.editing > #post_title');
+        this.titleInput = $('span.editing-content > input#post_title');
         this.events();
     }
 
