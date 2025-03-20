@@ -51,7 +51,7 @@ class AddProductExtension {
         } else {
             this.taxClassDropdown.val('physical-products');
         }
-        this.taxStatusDropdown.val('none');
+        this.taxStatusDropdown.val('taxable');
     }
 
     resetTaxClass() {
@@ -64,8 +64,8 @@ class AddProductExtension {
     }
 
     resetTaxStatus() {
-        this.taxStatusDropdown.val('none');
-        alert('Tax status must be set to none.');
+        this.taxStatusDropdown.val('taxable');
+        alert('Tax status must be set to Taxable.');
     }
 
     showWaitMessage() {
@@ -85,7 +85,7 @@ class AddProductExtension {
                 alert('Give your service a description.');
             }
             this.taxClassDropdown.val('digital-and-virtual-products');
-            this.taxStatusDropdown.val('none');
+            this.taxStatusDropdown.val('taxable');
         } else {
             this.virtualCheckbox.prop('checked', false);
         }
@@ -106,7 +106,7 @@ class AddProductExtension {
                 this.stockInput.val(0);
             }
             this.taxClassDropdown.val('physical-products');
-            this.taxStatusDropdown.val('none');
+            this.taxStatusDropdown.val('taxable');
         } else {
             this.manageStockCheckbox.prop('checked', false);
             this.stockFieldGroup.css('display', 'none');
@@ -128,7 +128,7 @@ class AddProductExtension {
                 this.stockInput.val(0);
             }
             this.taxClassDropdown.val('physical-products');
-            this.taxStatusDropdown.val('none');
+            this.taxStatusDropdown.val('taxable');
         } else {
             this.manageStockCheckbox.prop('checked', false);
             this.stockFieldGroup.css('display', 'none');
@@ -145,7 +145,7 @@ class AddProductExtension {
             this.serviceCatCheckbox.prop('checked', false);
             this.audiobookCatCheckbox.prop('checked', false);
             this.taxClassDropdown.val('digital-and-virtual-products');
-            this.taxStatusDropdown.val('none');
+            this.taxStatusDropdown.val('taxable');
         } else {
             this.downloadableCheckbox.prop('checked', false);
         }
@@ -161,7 +161,7 @@ class AddProductExtension {
             this.serviceCatCheckbox.prop('checked', false);
             this.ebookCatCheckbox.prop('checked', false);
             this.taxClassDropdown.val('digital-and-virtual-products');
-            this.taxStatusDropdown.val('none');
+            this.taxStatusDropdown.val('taxable');
         } else {
             this.downloadableCheckbox.prop('checked', false);
         }
@@ -175,12 +175,12 @@ class AddProductExtension {
             this.hardcoverCatCheckbox.prop('checked', false);
             this.uncategorizedCatCheckbox.prop('checked', false);
             this.taxClassDropdown.val('digital-and-virtual-products');
-            this.taxStatusDropdown.val('none');
+            this.taxStatusDropdown.val('taxable');
         } else {
             this.ebookCatCheckbox.prop('checked', false);
             this.audiobookCatCheckbox.prop('checked', false);
             this.taxClassDropdown.val('physical-products');
-            this.taxStatusDropdown.val('none');
+            this.taxStatusDropdown.val('taxable');
         }
     }
 
@@ -197,11 +197,11 @@ class AddProductExtension {
                 alert('Give your service a description.');
             }
             this.taxClassDropdown.val('digital-and-virtual-products');
-            this.taxStatusDropdown.val('none');
+            this.taxStatusDropdown.val('taxable');
         } else {
             this.serviceCatCheckbox.prop('checked', false);
             this.taxClassDropdown.val('physical-products');
-            this.taxStatusDropdown.val('none');
+            this.taxStatusDropdown.val('taxable');
         }
     }
 
