@@ -47,22 +47,26 @@ class AddProductExtension {
 
     setTaxInfo() {
         if (this.downloadableCheckbox.is(":checked")){
-            this.taxClassDropdown.val('digital-products');
+            this.taxClassDropdown.val('digital-books-10302000');
         } else if (this.virtualCheckbox.is(":checked")){
-            this.taxClassDropdown.val('services');
+            this.taxClassDropdown.val('services-20030000');
         } else {
-            this.taxClassDropdown.val('physical-products');
+            this.taxClassDropdown.val('physical-books-35010000');
         }
         this.taxStatusDropdown.val('taxable');
     }
 
     resetTaxClass() {
         if (this.downloadableCheckbox.is(":checked")){
-            this.taxClassDropdown.val('digital-products');
+            if (this.audiobookCatCheckbox.is(":checked")){
+                this.taxClassDropdown.val('audiobooks-10301000')
+            } else {
+                this.taxClassDropdown.val('digital-books-10302000');
+            }
         } else if (this.virtualCheckbox.is(":checked")){
-            this.taxClassDropdown.val('services');
+            this.taxClassDropdown.val('services-20030000');
         } else {
-            this.taxClassDropdown.val('physical-products');
+            this.taxClassDropdown.val('physical-books-35010000');
         }
         alert('Tax class is determined by product type.');
     }
@@ -88,7 +92,7 @@ class AddProductExtension {
             if (this.productDescription.text() == ''){
                 alert('Give your service a description.');
             }
-            this.taxClassDropdown.val('services');
+            this.taxClassDropdown.val('services-20030000');
             this.taxStatusDropdown.val('taxable');
         } else {
             this.virtualCheckbox.prop('checked', false);
@@ -109,7 +113,7 @@ class AddProductExtension {
                 alert('Enter the number of paperbacks you have ready to ship in the Stock field on the Inventory tab.');
                 this.stockInput.val(0);
             }
-            this.taxClassDropdown.val('physical-products');
+            this.taxClassDropdown.val('physical-books-35010000');
             this.taxStatusDropdown.val('taxable');
         } else {
             this.manageStockCheckbox.prop('checked', false);
@@ -131,7 +135,7 @@ class AddProductExtension {
                 alert('Enter the number of paperbacks you have ready to ship in the Stock field on the Inventory tab.');
                 this.stockInput.val(0);
             }
-            this.taxClassDropdown.val('physical-products');
+            this.taxClassDropdown.val('physical-books-35010000');
             this.taxStatusDropdown.val('taxable');
         } else {
             this.manageStockCheckbox.prop('checked', false);
@@ -148,7 +152,7 @@ class AddProductExtension {
             this.uncategorizedCatCheckbox.prop('checked', false);
             this.serviceCatCheckbox.prop('checked', false);
             this.audiobookCatCheckbox.prop('checked', false);
-            this.taxClassDropdown.val('digital-products');
+            this.taxClassDropdown.val('digital-books-10302000');
             this.taxStatusDropdown.val('taxable');
         } else {
             this.downloadableCheckbox.prop('checked', false);
@@ -164,7 +168,7 @@ class AddProductExtension {
             this.uncategorizedCatCheckbox.prop('checked', false);
             this.serviceCatCheckbox.prop('checked', false);
             this.ebookCatCheckbox.prop('checked', false);
-            this.taxClassDropdown.val('digital-products');
+            this.taxClassDropdown.val('audiobooks-10301000');
             this.taxStatusDropdown.val('taxable');
         } else {
             this.downloadableCheckbox.prop('checked', false);
@@ -178,12 +182,16 @@ class AddProductExtension {
             this.paperbackCatCheckbox.prop('checked', false);
             this.hardcoverCatCheckbox.prop('checked', false);
             this.uncategorizedCatCheckbox.prop('checked', false);
-            this.taxClassDropdown.val('digital-products');
+            if (this.audiobookCatCheckbox.is(":checked")){
+                this.taxClassDropdown.val('audiobooks-10301000')
+            } else {
+                this.taxClassDropdown.val('digital-books-10302000');
+            }
             this.taxStatusDropdown.val('taxable');
         } else {
             this.ebookCatCheckbox.prop('checked', false);
             this.audiobookCatCheckbox.prop('checked', false);
-            this.taxClassDropdown.val('physical-products');
+            this.taxClassDropdown.val('physical-books-35010000');
             this.taxStatusDropdown.val('taxable');
         }
     }
@@ -200,11 +208,11 @@ class AddProductExtension {
             if (this.productDescription.text() == ''){
                 alert('Give your service a description.');
             }
-            this.taxClassDropdown.val('services');
+            this.taxClassDropdown.val('services-20030000');
             this.taxStatusDropdown.val('taxable');
         } else {
             this.serviceCatCheckbox.prop('checked', false);
-            this.taxClassDropdown.val('physical-products');
+            this.taxClassDropdown.val('physical-books-35010000');
             this.taxStatusDropdown.val('taxable');
         }
     }
