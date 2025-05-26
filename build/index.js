@@ -177,7 +177,6 @@ class AddProductExtension {
     }
   }
   updateCheckboxesDigitalZine() {
-    console.log('update digital zine called');
     if (this.digitalZineCheckbox.is(":checked")) {
       this.virtualCheckbox.prop('checked', false);
       this.downloadableCheckbox.prop('checked', true);
@@ -195,7 +194,6 @@ class AddProductExtension {
     }
   }
   updateCheckboxesPhysicalZine() {
-    console.log('physical zine update called');
     if (this.physicalZineCheckbox.is(":checked")) {
       this.virtualCheckbox.prop('checked', false);
       this.downloadableCheckbox.prop('checked', false);
