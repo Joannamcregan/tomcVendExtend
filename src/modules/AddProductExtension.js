@@ -175,6 +175,11 @@ class AddProductExtension {
             this.physicalZineCheckbox.prop('checked', false);
             this.downloadableDiv.addClass('block');
             this.downloadableDiv.attr('style', 'display: block');
+            if ($('td.file_url_choose').length < 1){
+                alert('Click the Add File button and add your ebook file.');
+            } else if ($('td.file_name > input').val() == '') {
+                alert('Click the Add File button and add your ebook file.');
+            }
         } else {
             this.downloadableCheckbox.prop('checked', false);
         }
