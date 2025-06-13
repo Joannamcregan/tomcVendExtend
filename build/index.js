@@ -42,6 +42,7 @@ class AddProductExtension {
     this.taxStatusDropdown = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#_tax_status');
     this.taxClassDropdown = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#_tax_class');
     this.titleInput = jquery__WEBPACK_IMPORTED_MODULE_0___default()('span.editing-content > input#post_title');
+    this.downloadableDiv = jquery__WEBPACK_IMPORTED_MODULE_0___default()('div.show_if_downloadable');
     this.events();
   }
   events() {
@@ -109,6 +110,7 @@ class AddProductExtension {
       this.taxStatusDropdown.val('taxable');
       this.digitalZineCheckbox.prop('checked', false);
       this.physicalZineCheckbox.prop('checked', false);
+      this.downloadableDiv.removeClass('block');
     } else {
       this.virtualCheckbox.prop('checked', false);
     }
@@ -131,6 +133,7 @@ class AddProductExtension {
       this.taxStatusDropdown.val('taxable');
       this.digitalZineCheckbox.prop('checked', false);
       this.physicalZineCheckbox.prop('checked', false);
+      this.downloadableDiv.removeClass('block');
     } else {
       this.manageStockCheckbox.prop('checked', false);
       this.stockFieldGroup.css('display', 'none');
@@ -154,6 +157,7 @@ class AddProductExtension {
       this.taxStatusDropdown.val('taxable');
       this.digitalZineCheckbox.prop('checked', false);
       this.physicalZineCheckbox.prop('checked', false);
+      this.downloadableDiv.removeClass('block');
     } else {
       this.manageStockCheckbox.prop('checked', false);
       this.stockFieldGroup.css('display', 'none');
@@ -172,6 +176,7 @@ class AddProductExtension {
       this.taxStatusDropdown.val('taxable');
       this.digitalZineCheckbox.prop('checked', false);
       this.physicalZineCheckbox.prop('checked', false);
+      this.downloadableDiv.addClass('block');
     } else {
       this.downloadableCheckbox.prop('checked', false);
     }
@@ -189,6 +194,7 @@ class AddProductExtension {
       this.taxStatusDropdown.val('taxable');
       this.physicalZineCheckbox.prop('checked', false);
       this.ebookCatCheckbox.prop('checked', false);
+      this.downloadableDiv.addClass('block');
     } else {
       this.downloadableCheckbox.prop('checked', false);
     }
@@ -211,6 +217,7 @@ class AddProductExtension {
       this.taxStatusDropdown.val('taxable');
       this.paperbackCatCheckbox.prop('checked', false);
       this.digitalZineCheckbox.prop('checked', false);
+      this.downloadableDiv.removeClass('block');
     } else {
       this.manageStockCheckbox.prop('checked', false);
       this.stockFieldGroup.css('display', 'none');
@@ -229,6 +236,7 @@ class AddProductExtension {
       this.taxStatusDropdown.val('taxable');
       this.digitalZineCheckbox.prop('checked', false);
       this.physicalZineCheckbox.prop('checked', false);
+      this.downloadableDiv.addClass('block');
     } else {
       this.downloadableCheckbox.prop('checked', false);
     }
@@ -246,11 +254,13 @@ class AddProductExtension {
         this.taxClassDropdown.val('digital-books-10302000');
       }
       this.taxStatusDropdown.val('taxable');
+      this.downloadableDiv.addClass('block');
     } else {
       this.ebookCatCheckbox.prop('checked', false);
       this.audiobookCatCheckbox.prop('checked', false);
       this.taxClassDropdown.val('physical-books-35010000');
       this.taxStatusDropdown.val('taxable');
+      this.downloadableDiv.removeClass('block');
     }
   }
   updateCheckboxesVirtual() {
@@ -267,6 +277,7 @@ class AddProductExtension {
       }
       this.taxClassDropdown.val('services-20030000');
       this.taxStatusDropdown.val('taxable');
+      this.downloadableDiv.removeClass('block');
     } else {
       this.serviceCatCheckbox.prop('checked', false);
       this.taxClassDropdown.val('physical-books-35010000');
