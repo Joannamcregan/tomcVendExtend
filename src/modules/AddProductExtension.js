@@ -255,6 +255,8 @@ class AddProductExtension {
                 alert('Click the Add File button and add your audiobook file.');
             } else if ($('td.file_name > input').val() == '') {
                 alert('Add your audiobook file.');
+            } else {
+                console.log($('td.file_name > input').val());
             }
         } else {
             this.downloadableCheckbox.prop('checked', false);
