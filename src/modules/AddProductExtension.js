@@ -177,7 +177,7 @@ class AddProductExtension {
             this.downloadableDiv.attr('style', 'display: block');
             if ($('td.file_url_choose').length < 1){
                 alert('Click the Add File button and add your ebook file.');
-            } else if ($('td.file_name > input').val() == '') {
+            } else if ($('td.file_url > input').val() == '') {
                 alert('Add your ebook file.');
             }
         } else {
@@ -202,7 +202,7 @@ class AddProductExtension {
             this.downloadableDiv.attr('style', 'display: block');
             if ($('td.file_url_choose').length < 1){
                 alert('Click the Add File button and add your digital zine file.');
-            } else if ($('td.file_name > input').val() == '') {
+            } else if ($('td.file_url > input').val() == '') {
                 alert('Add your digital zine file.');
             }
         } else {
@@ -255,8 +255,6 @@ class AddProductExtension {
                 alert('Click the Add File button and add your audiobook file.');
             } else if ($('td.file_url > input').val() == '') {
                 alert('Add your audiobook file.');
-            } else {
-                console.log($('td.file_url > input').val());
             }
         } else {
             this.downloadableCheckbox.prop('checked', false);
