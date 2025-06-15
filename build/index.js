@@ -258,6 +258,8 @@ class AddProductExtension {
         alert('Click the Add File button and add your audiobook file.');
       } else if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('td.file_url > input').val() == '') {
         alert('Add your audiobook file.');
+      } else {
+        console.log(jquery__WEBPACK_IMPORTED_MODULE_0___default()('td.file_url > input').val());
       }
     } else {
       this.downloadableCheckbox.prop('checked', false);
