@@ -225,7 +225,7 @@ class AddProductExtension {
       this.manageStockCheckbox.prop('checked', true);
       this.stockFieldGroup.css('display', 'block');
       if (this.stockInput.val() == '' || Number(this.stockInput.val()) == 0 || isNaN(this.stockInput.val())) {
-        alert('Enter the number of paperbacks you have ready to ship in the Stock field on the Inventory tab.');
+        alert('Enter the number of zines you have ready to ship in the Stock field on the Inventory tab.');
         this.stockInput.val(0);
       }
       this.taxClassDropdown.val('physical-books-35010000');
