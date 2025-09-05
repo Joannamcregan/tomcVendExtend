@@ -28,7 +28,7 @@ class AddProductExtension {
         this.taxClassDropdown = $('#_tax_class');
         this.titleInput = $('span.editing-content > input#post_title');
         this.downloadableDiv = $('div.show_if_downloadable');
-        this.couponTitle = $('div.coupon-primary-info input.post_title');
+        this.couponTitle = $('div.coupon-primary-info > input#post_title');
         this.events();
     }
 
