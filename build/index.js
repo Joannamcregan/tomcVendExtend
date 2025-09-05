@@ -43,7 +43,7 @@ class AddProductExtension {
     this.taxClassDropdown = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#_tax_class');
     this.titleInput = jquery__WEBPACK_IMPORTED_MODULE_0___default()('span.editing-content > input#post_title');
     this.downloadableDiv = jquery__WEBPACK_IMPORTED_MODULE_0___default()('div.show_if_downloadable');
-    this.addCoupon = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.mvx-venrod-dashboard-nav-link--add-coupon');
+    this.addCoupon = jquery__WEBPACK_IMPORTED_MODULE_0___default()('a.mvx-venrod-dashboard-nav-link--add-coupon');
     this.events();
   }
   events() {
