@@ -53,7 +53,8 @@ class AddProductExtension {
     }
 
     styleDashboardCouponOptions() {
-        $('option[value="fixed_product"]').attr('selected', 'selected');
+        console.log('add coupon clicked');
+        $('option[value="fixed_product"]').prop('selected', 'selected');
     }
 
     setTaxInfo() {

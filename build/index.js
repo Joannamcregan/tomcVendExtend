@@ -66,7 +66,8 @@ class AddProductExtension {
     this.addCoupon.on('click', this.styleDashboardCouponOptions.bind(this));
   }
   styleDashboardCouponOptions() {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('option[value="fixed_product"]').attr('selected', 'selected');
+    console.log('add coupon clicked');
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('option[value="fixed_product"]').prop('selected', 'selected');
   }
   setTaxInfo() {
     if (this.downloadableCheckbox.is(":checked")) {
