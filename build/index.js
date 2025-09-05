@@ -43,7 +43,7 @@ class AddProductExtension {
     this.taxClassDropdown = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#_tax_class');
     this.titleInput = jquery__WEBPACK_IMPORTED_MODULE_0___default()('span.editing-content > input#post_title');
     this.downloadableDiv = jquery__WEBPACK_IMPORTED_MODULE_0___default()('div.show_if_downloadable');
-    this.addCoupon = jquery__WEBPACK_IMPORTED_MODULE_0___default()('a.mvx-venrod-dashboard-nav-link--add-coupon');
+    this.couponTitle = jquery__WEBPACK_IMPORTED_MODULE_0___default()('div.coupon-primary-info input.post_title');
     this.events();
   }
   events() {
@@ -63,7 +63,7 @@ class AddProductExtension {
     this.taxStatusDropdown.on('change', this.resetTaxStatus.bind(this));
     this.taxClassDropdown.on('change', this.resetTaxClass.bind(this));
     this.titleInput.on('click', this.setTaxInfo.bind(this));
-    this.addCoupon.on('click', this.styleDashboardCouponOptions.bind(this));
+    this.couponTitle.on('change', this.styleDashboardCouponOptions.bind(this));
   }
   styleDashboardCouponOptions() {
     console.log('add coupon clicked');

@@ -28,7 +28,7 @@ class AddProductExtension {
         this.taxClassDropdown = $('#_tax_class');
         this.titleInput = $('span.editing-content > input#post_title');
         this.downloadableDiv = $('div.show_if_downloadable');
-        this.addCoupon = $('a.mvx-venrod-dashboard-nav-link--add-coupon');
+        this.couponTitle = $('div.coupon-primary-info input.post_title');
         this.events();
     }
 
@@ -49,7 +49,7 @@ class AddProductExtension {
         this.taxStatusDropdown.on('change', this.resetTaxStatus.bind(this));
         this.taxClassDropdown.on('change', this.resetTaxClass.bind(this));
         this.titleInput.on('click', this.setTaxInfo.bind(this));
-        this.addCoupon.on('click', this.styleDashboardCouponOptions.bind(this));
+        this.couponTitle.on('change', this.styleDashboardCouponOptions.bind(this));
     }
 
     styleDashboardCouponOptions() {
