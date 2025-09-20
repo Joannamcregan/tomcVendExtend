@@ -31,10 +31,10 @@ class AddProductExtension {
     this.virtualCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input#_virtual');
     this.downloadableCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input#_downloadable');
     this.serviceCatCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=53]'); //53 for dev, somehow also 53 for prod
-    this.paperbackCatCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=52]'); //60 for dev, 52 for prod
-    this.hardcoverCatCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=51]'); //59 for dev, 51 for prod
+    this.paperbackCatCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=52]'); //51 for dev, 52 for prod
+    this.hardcoverCatCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=51]'); //50 for dev, 51 for prod
     this.ebookCatCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=49]'); //51 for dev, 49 for prod
-    this.audiobookCatCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=50]'); //52 for dev, 50 for prod
+    this.audiobookCatCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=50]'); //49 for dev, 50 for prod
     this.physicalZineCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=76]');
     this.digitalZineCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=75]');
     this.uncategorizedCatCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=16]'); //16 for dev, somehow also 16 for prod
@@ -44,6 +44,9 @@ class AddProductExtension {
     this.titleInput = jquery__WEBPACK_IMPORTED_MODULE_0___default()('span.editing-content > input#post_title');
     this.downloadableDiv = jquery__WEBPACK_IMPORTED_MODULE_0___default()('div.show_if_downloadable');
     this.couponTitle = jquery__WEBPACK_IMPORTED_MODULE_0___default()('div.coupon-primary-info input#post_title');
+    this.weightField = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#shipping_product_data input#_weight');
+    this.perProductInsert = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#shipping_product_data a.insert');
+    this.perProductCost = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#shipping_product_data td.item_cost input');
     this.events();
   }
   events() {
@@ -64,9 +67,47 @@ class AddProductExtension {
     this.taxClassDropdown.on('change', this.resetTaxClass.bind(this));
     this.titleInput.on('click', this.setTaxInfo.bind(this));
     this.couponTitle.on('change', this.styleDashboardCouponOptions.bind(this));
+    this.weightField.on('change', this.addShippingByWeight.bind(this));
+  }
+  addShippingByWeight(e) {
+    const weight = parseFloat(jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).val());
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#shipping_product_data i.ico-delete-icon').trigger('click');
+    this.perProductInsert.trigger('click');
+    if (weight <= 1) {
+      this.perProductCost.val(4.47);
+    } else if (weight <= 2) {
+      this.perProductCost.val(5.22);
+    } else if (weight <= 3) {
+      this.perProductCost.val(5.97);
+    } else if (weight <= 4) {
+      this.perProductCost.val(6.72);
+    } else if (weight <= 5) {
+      this.perProductCost.val(7.47);
+    } else if (weight <= 6) {
+      this.perProductCost.val(8.22);
+    } else if (weight <= 7) {
+      this.perProductCost.val(8.97);
+    } else if (weight <= 8) {
+      this.perProductCost.val(9.72);
+    } else if (weight <= 9) {
+      this.perProductCost.val(10.47);
+    } else if (weight <= 10) {
+      this.perProductCost.val(11.22);
+    } else if (weight <= 11) {
+      this.perProductCost.val(11.97);
+    } else if (weight <= 12) {
+      this.perProductCost.val(12.72);
+    } else if (weight <= 13) {
+      this.perProductCost.val(13.47);
+    } else if (weight <= 14) {
+      this.perProductCost.val(14.22);
+    } else if (weight <= 15) {
+      this.perProductCost.val(14.97);
+    } else {
+      alert('More than 15 lbs? Visit https://www.usps.com/ship/mail-shipping-services.htm#mediamail for rate info.');
+    }
   }
   styleDashboardCouponOptions() {
-    console.log('add coupon clicked');
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('option[value="fixed_product"]').prop('selected', 'selected');
   }
   setTaxInfo() {
