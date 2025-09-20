@@ -46,7 +46,7 @@ class AddProductExtension {
     this.couponTitle = jquery__WEBPACK_IMPORTED_MODULE_0___default()('div.coupon-primary-info input#post_title');
     this.weightField = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#shipping_product_data input#_weight');
     this.perProductInsert = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#shipping_product_data a.insert');
-    this.perProductCost = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#shipping_product_data td.item_cost input');
+    this.perProductCost = jquery__WEBPACK_IMPORTED_MODULE_0___default()('td.item_cost input');
     this.events();
   }
   events() {

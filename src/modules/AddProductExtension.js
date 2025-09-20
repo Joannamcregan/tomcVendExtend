@@ -31,7 +31,7 @@ class AddProductExtension {
         this.couponTitle = $('div.coupon-primary-info input#post_title');
         this.weightField = $('#shipping_product_data input#_weight');
         this.perProductInsert = $('#shipping_product_data a.insert');
-        this.perProductCost = $('#shipping_product_data td.item_cost input');
+        this.perProductCost = $('td.item_cost input');
         this.events();
     }
 
