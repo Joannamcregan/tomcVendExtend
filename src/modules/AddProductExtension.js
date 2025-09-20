@@ -57,6 +57,7 @@ class AddProductExtension {
     }
 
     addShippingByWeight(e) {
+        console.log(this.perProductCost.val());
         const weight = parseFloat($(e.target).val());
         $('#shipping_product_data i.ico-delete-icon').trigger('click');
         this.perProductInsert.trigger('click');

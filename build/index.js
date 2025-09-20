@@ -70,6 +70,7 @@ class AddProductExtension {
     this.weightField.on('change', this.addShippingByWeight.bind(this));
   }
   addShippingByWeight(e) {
+    console.log(this.perProductCost.val());
     const weight = parseFloat(jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).val());
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#shipping_product_data i.ico-delete-icon').trigger('click');
     this.perProductInsert.trigger('click');
