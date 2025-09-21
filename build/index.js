@@ -46,7 +46,6 @@ class AddProductExtension {
     this.couponTitle = jquery__WEBPACK_IMPORTED_MODULE_0___default()('div.coupon-primary-info input#post_title');
     this.weightField = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#shipping_product_data input#_weight');
     this.perProductInsert = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#shipping_product_data a.insert');
-    this.perProductCost = jquery__WEBPACK_IMPORTED_MODULE_0___default()('td.item_cost input');
     this.events();
   }
   events() {
@@ -70,40 +69,40 @@ class AddProductExtension {
     this.weightField.on('change', this.addShippingByWeight.bind(this));
   }
   addShippingByWeight(e) {
-    console.log(this.perProductCost.val());
+    const perProductCost = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#shipping_product_data td.item_cost input');
     const weight = parseFloat(jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).val());
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#shipping_product_data i.ico-delete-icon').trigger('click');
     this.perProductInsert.trigger('click');
     if (weight <= 1) {
-      this.perProductCost.val("4.47");
+      perProductCost.val("4.47");
     } else if (weight <= 2) {
-      this.perProductCost.val("5.22");
+      perProductCost.val("5.22");
     } else if (weight <= 3) {
-      this.perProductCost.val("5.97");
+      perProductCost.val("5.97");
     } else if (weight <= 4) {
-      this.perProductCost.val("6.72");
+      perProductCost.val("6.72");
     } else if (weight <= 5) {
-      this.perProductCost.val("7.47");
+      perProductCost.val("7.47");
     } else if (weight <= 6) {
-      this.perProductCost.val("8.22");
+      perProductCost.val("8.22");
     } else if (weight <= 7) {
-      this.perProductCost.val("8.97");
+      perProductCost.val("8.97");
     } else if (weight <= 8) {
-      this.perProductCost.val("9.72");
+      perProductCost.val("9.72");
     } else if (weight <= 9) {
-      this.perProductCost.val("10.47");
+      perProductCost.val("10.47");
     } else if (weight <= 10) {
-      this.perProductCost.val("11.22");
+      perProductCost.val("11.22");
     } else if (weight <= 11) {
-      this.perProductCost.val("11.97");
+      perProductCost.val("11.97");
     } else if (weight <= 12) {
-      this.perProductCost.val("12.72");
+      perProductCost.val("12.72");
     } else if (weight <= 13) {
-      this.perProductCost.val("13.47");
+      perProductCost.val("13.47");
     } else if (weight <= 14) {
-      this.perProductCost.val("14.22");
+      perProductCost.val("14.22");
     } else if (weight <= 15) {
-      this.perProductCost.val("14.97");
+      perProductCost.val("14.97");
     } else {
       alert('More than 15 lbs? Visit https://www.usps.com/ship/mail-shipping-services.htm#mediamail for rate info.');
     }
