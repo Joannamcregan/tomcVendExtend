@@ -56,7 +56,6 @@ class AddProductExtension {
     }
 
     addShippingByWeight(e) {
-        console.log('the weight changed to ' + $(e.target).val());
         let weight = parseFloat($(e.target).val());
         $('#shipping_product_data i.ico-delete-icon').trigger('click');
         this.perProductInsert.trigger('click');
@@ -184,7 +183,7 @@ class AddProductExtension {
             this.manageStockCheckbox.prop('checked', true);
             this.stockFieldGroup.css('display', 'block');
             if (this.stockInput.val() == '' || Number(this.stockInput.val()) == 0 || isNaN(this.stockInput.val())){
-                alert('Enter the number of paperbacks you have ready to ship in the Stock field on the Inventory tab.');
+                alert('Enter the number of hardcover books you have ready to ship in the Stock field on the Inventory tab. Enter the hardcover weight in the Shipping tab.');
                 this.stockInput.val(0);
             }
             this.taxClassDropdown.val('physical-books-35010000');
@@ -210,7 +209,7 @@ class AddProductExtension {
             this.manageStockCheckbox.prop('checked', true);
             this.stockFieldGroup.css('display', 'block');
             if (this.stockInput.val() == '' || Number(this.stockInput.val()) == 0 || isNaN(this.stockInput.val())){
-                alert('Enter the number of paperbacks you have ready to ship in the Stock field on the Inventory tab.');
+                alert('Enter the number of paperback books you have ready to ship in the Stock field on the Inventory tab. Enter the paperback weight in the Shipping tab.');
                 this.stockInput.val(0);
             }
             this.taxClassDropdown.val('physical-books-35010000');
