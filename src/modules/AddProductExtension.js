@@ -56,7 +56,7 @@ class AddProductExtension {
     }
 
     addShippingByWeight(e) {
-        const perProductCost = $('#shipping_product_data td.item_cost input');
+        const perProductCost = $('td.item_cost input');
         console.log(perProductCost.val());
         const weight = parseFloat($(e.target).val());
         $('#shipping_product_data i.ico-delete-icon').trigger('click');
