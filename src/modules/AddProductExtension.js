@@ -39,7 +39,6 @@ class AddProductExtension {
         this.gtinInput.on('focusout', this.checkIsbn.bind(this));
         this.regularPrice.on('focusout', this.checkPrices.bind(this));
         this.downloadableCheckbox.on('change', this.updateCheckboxesDownloadable.bind(this));
-        this.virtualCheckbox.on('change', this.updateCheckboxesVirtual.bind(this));
         this.serviceCatCheckbox.on('change', this.updateCheckboxesService.bind(this));
         this.paperbackCatCheckbox.on('change', this.updateCheckboxesPaperback.bind(this));
         this.hardcoverCatCheckbox.on('change', this.updateCheckboxesHardcover.bind(this));
@@ -228,6 +227,7 @@ class AddProductExtension {
         if (this.ebookCatCheckbox.is(":checked")){
             this.virtualCheckbox.prop('checked', false);
             this.downloadableCheckbox.prop('checked', true);
+            this.virtualCheckbox.prop('checked', true);
             this.paperbackCatCheckbox.prop('checked', false);
             this.hardcoverCatCheckbox.prop('checked', false);
             this.uncategorizedCatCheckbox.prop('checked', false);
@@ -253,6 +253,7 @@ class AddProductExtension {
         if (this.digitalZineCheckbox.is(":checked")){
             this.virtualCheckbox.prop('checked', false);
             this.downloadableCheckbox.prop('checked', true);
+            this.virtualCheckbox.prop('checked', true);
             this.paperbackCatCheckbox.prop('checked', false);
             this.hardcoverCatCheckbox.prop('checked', false);
             this.uncategorizedCatCheckbox.prop('checked', false);
@@ -304,6 +305,7 @@ class AddProductExtension {
         if (this.audiobookCatCheckbox.is(":checked")){
             this.virtualCheckbox.prop('checked', false);
             this.downloadableCheckbox.prop('checked', true);
+            this.virtualCheckbox.prop('checked', true);
             this.paperbackCatCheckbox.prop('checked', false);
             this.hardcoverCatCheckbox.prop('checked', false);
             this.uncategorizedCatCheckbox.prop('checked', false);
@@ -327,48 +329,13 @@ class AddProductExtension {
 
     updateCheckboxesDownloadable() {
         if (this.downloadableCheckbox.is(":checked")) {
-            this.virtualCheckbox.prop('checked', false);
-            this.serviceCatCheckbox.prop('checked', false);
-            this.paperbackCatCheckbox.prop('checked', false);
-            this.hardcoverCatCheckbox.prop('checked', false);
-            this.uncategorizedCatCheckbox.prop('checked', false);
-            if (this.audiobookCatCheckbox.is(":checked")){
-                this.taxClassDropdown.val('audiobooks-10301000')
-            } else {
-                this.taxClassDropdown.val('digital-books-10302000');
-            }
             this.taxStatusDropdown.val('taxable');
             this.downloadableDiv.addClass('block');
             this.downloadableDiv.attr('style', 'display: block');
         } else {
             this.ebookCatCheckbox.prop('checked', false);
             this.audiobookCatCheckbox.prop('checked', false);
-            this.taxClassDropdown.val('physical-books-35010000');
-            this.taxStatusDropdown.val('taxable');
-            this.downloadableDiv.removeClass('block');
-            this.downloadableDiv.attr('style', 'display: none');
-        }
-    }
-
-    updateCheckboxesVirtual() {
-        if (this.virtualCheckbox.is(":checked")) {
-            this.downloadableCheckbox.prop('checked', false);
-            this.serviceCatCheckbox.prop('checked', true);
-            this.paperbackCatCheckbox.prop('checked', false);
-            this.hardcoverCatCheckbox.prop('checked', false);
-            this.uncategorizedCatCheckbox.prop('checked', false);
-            this.ebookCatCheckbox.prop('checked', false);
-            this.audiobookCatCheckbox.prop('checked', false);
-            if (this.productDescription.text() == ''){
-                alert('Give your service a description.');
-            }
-            this.taxClassDropdown.val('services-20030000');
-            this.taxStatusDropdown.val('taxable');
-            this.downloadableDiv.removeClass('block');
-            this.downloadableDiv.attr('style', 'display: none');
-        } else {
-            this.serviceCatCheckbox.prop('checked', false);
-            this.taxClassDropdown.val('physical-books-35010000');
+            this.digitalZineCheckbox.prop('checked', false);
             this.taxStatusDropdown.val('taxable');
         }
     }
