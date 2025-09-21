@@ -56,12 +56,13 @@ class AddProductExtension {
     }
 
     addShippingByWeight(e) {
-        const perProductCost = $('td.item_cost input:visible');
+        console.log('the weight changed to ' + $(e.target).val());
+        let perProductCost = $('td.item_cost input:visible');
         let weight = parseFloat($(e.target).val());
         $('#shipping_product_data i.ico-delete-icon').trigger('click');
         this.perProductInsert.trigger('click');
         if (weight <= 1){
-            perProductCost.val("4.47");
+            perProductCost.val(4.47);
             perProductCost.attr("placeholder", "4.47");
         } else if (weight <= 2){
             perProductCost.val("5.22");
