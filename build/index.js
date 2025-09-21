@@ -70,7 +70,7 @@ class AddProductExtension {
   }
   addShippingByWeight(e) {
     const perProductCost = jquery__WEBPACK_IMPORTED_MODULE_0___default()('td.item_cost input:visible');
-    const weight = parseFloat(jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).val());
+    let weight = parseFloat(jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).val());
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#shipping_product_data i.ico-delete-icon').trigger('click');
     this.perProductInsert.trigger('click');
     if (weight <= 1) {
