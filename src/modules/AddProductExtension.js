@@ -17,8 +17,8 @@ class AddProductExtension {
         this.downloadableCheckbox = $('input#_downloadable');
         this.serviceCatCheckbox = $('ul.product_cat input[value=53]'); //53 for dev, somehow also 53 for prod
         this.paperbackCatCheckbox = $('ul.product_cat input[value=52]'); //51 for dev, 52 for prod
-        this.hardcoverCatCheckbox = $('ul.product_cat input[value=51]'); //50 for dev, 51 for prod
-        this.ebookCatCheckbox = $('ul.product_cat input[value=49]'); //51 for dev, 49 for prod
+        this.hardcoverCatCheckbox = $('ul.product_cat input[value=85]'); //50 for dev, 85 for prod
+        this.ebookCatCheckbox = $('ul.product_cat input[value=84]'); //51 for dev, 84 for prod
         this.audiobookCatCheckbox = $('ul.product_cat input[value=50]'); //49 for dev, 50 for prod
         this.physicalZineCheckbox = $('ul.product_cat input[value=76]');
         this.digitalZineCheckbox = $('ul.product_cat input[value=75]');
