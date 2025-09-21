@@ -57,40 +57,54 @@ class AddProductExtension {
 
     addShippingByWeight(e) {
         const perProductCost = $('td.item_cost input');
-        console.log(perProductCost.val());
         const weight = parseFloat($(e.target).val());
         $('#shipping_product_data i.ico-delete-icon').trigger('click');
         this.perProductInsert.trigger('click');
         if (weight <= 1){
             perProductCost.val("4.47");
+            perProductCost.attr("placeholder", "4.47");
         } else if (weight <= 2){
             perProductCost.val("5.22");
+            perProductCost.attr("placeholder", "5.22");
         } else if (weight <= 3){
             perProductCost.val("5.97");
+            perProductCost.attr("placeholder", "5.97");
         } else if (weight <= 4){
             perProductCost.val("6.72");
+            perProductCost.attr("placeholder", "6.72");
         } else if (weight <= 5){
             perProductCost.val("7.47");
+            perProductCost.attr("placeholder", "7.47");
         } else if (weight <= 6){
             perProductCost.val("8.22");
+            perProductCost.attr("placeholder", "8.22");
         } else if (weight <= 7){
             perProductCost.val("8.97");
+            perProductCost.attr("placeholder", "8.97");
         } else if (weight <= 8){
             perProductCost.val("9.72");
+            perProductCost.attr("placeholder", "9.72");
         } else if (weight <= 9){
             perProductCost.val("10.47");
+            perProductCost.attr("placeholder", "10.47");
         } else if (weight <= 10){
             perProductCost.val("11.22");
+            perProductCost.attr("placeholder", "11.22");
         } else if (weight <= 11){
             perProductCost.val("11.97");
+            perProductCost.attr("placeholder", "11.97");
         } else if (weight <= 12){
             perProductCost.val("12.72");
+            perProductCost.attr("placeholder", "12.72");
         } else if (weight <= 13){
             perProductCost.val("13.47");
+            perProductCost.attr("placeholder", "13.47");
         } else if (weight <= 14){
             perProductCost.val("14.22");
+            perProductCost.attr("placeholder", "14.22");
         } else if (weight <= 15){
             perProductCost.val("14.97");
+            perProductCost.attr("placeholder", "14.97");
         } else {
             alert('More than 15 lbs? Visit https://www.usps.com/ship/mail-shipping-services.htm#mediamail for rate info.')
         }
