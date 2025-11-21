@@ -101,6 +101,14 @@ class AddProductExtension {
                     this.mvxSubmit.removeClass('hidden');
                     $(e.target).addClass('hidden');
                 }
+            } else if (this.physicalZineCheckbox.is(":checked")){
+                if (this.stockInput.val() == '' || Number(this.stockInput.val()) == 0 || isNaN(this.stockInput.val())){
+                    alert('Enter the number of zines you have ready to ship in the Stock field on the Inventory tab.');
+                    this.stockInput.val(0);
+                } else {
+                    this.mvxSubmit.removeClass('hidden');
+                    $(e.target).addClass('hidden');
+                }
             }
         }
 
@@ -112,13 +120,7 @@ class AddProductExtension {
         
         
         
-        // if (this.stockInput.val() == '' || Number(this.stockInput.val()) == 0 || isNaN(this.stockInput.val())){
-        //     alert('Enter the number of zines you have ready to ship in the Stock field on the Inventory tab.');
-        //     this.stockInput.val(0);
-        // } else {
-        //     this.mvxSubmit.removeClass('hidden');
-        //     $(e.target).addClass('hidden');
-        // }
+        
     }
 
     addShippingByWeight(e) {
@@ -378,9 +380,13 @@ class AddProductExtension {
             this.digitalZineCheckbox.prop('checked', false);
             this.downloadableDiv.removeClass('block');
             this.downloadableDiv.attr('style', 'display: none');
+            this.mvxSubmit.addClass('hidden');
+            this.reviewButton.removeClass('hidden');
         } else {
             this.manageStockCheckbox.prop('checked', false);
             this.stockFieldGroup.css('display', 'none');
+            this.mvxSubmit.addClass('hidden');
+            this.reviewButton.removeClass('hidden');
         }
     }
 
