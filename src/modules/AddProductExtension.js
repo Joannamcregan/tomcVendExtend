@@ -209,6 +209,8 @@ class AddProductExtension {
             this.taxClassDropdown.val('physical-books-35010000');
         }
         this.taxStatusDropdown.val('taxable');
+        this.mvxSubmit.addClass('hidden');
+        this.reviewButton.removeClass('hidden');
     }
 
     resetTaxClass() {
