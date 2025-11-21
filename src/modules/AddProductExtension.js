@@ -4,7 +4,7 @@ class AddProductExtension {
     constructor() {
         this.mvxSubmit = $('input#mvx_frontend_dashboard_product_submit');
         this.titleInput = $('input#post_title');
-        this.productDescription = $('#tinymce p');
+        // this.productDescription = $('#tinymce');
         this.scheduleSaleButton = $(".sale_schedule");
         this.regularPrice = $('#_regular_price');
         this.salePrice = $('#_sale_price');
@@ -15,7 +15,7 @@ class AddProductExtension {
         this.productTitleSection = $('.product-title-wrap');
         this.virtualCheckbox = $('input#_virtual');
         this.downloadableCheckbox = $('input#_downloadable');
-        this.serviceCatCheckbox = $('ul.product_cat input[value=53]'); //53 for dev, somehow also 53 for prod
+        this.serviceCatCheckbox = $('ul.product_cat input[value=58]'); //58 for dev, 53 for prod
         this.paperbackCatCheckbox = $('ul.product_cat input[value=51]'); //51 for dev, 84 for prod
         this.hardcoverCatCheckbox = $('ul.product_cat input[value=50]'); //50 for dev, 85 for prod
         this.ebookCatCheckbox = $('ul.product_cat input[value=48]'); //48 for dev, 49 for prod
@@ -109,12 +109,20 @@ class AddProductExtension {
                     this.mvxSubmit.removeClass('hidden');
                     $(e.target).addClass('hidden');
                 }
+            } else if (this.serviceCatCheckbox.is(":checked")){
+                let productDescription = tinymce.activeEditor.getContent();
+                if (productDescription == ''){
+                    alert('Give your service a description.');
+                } else {
+                    this.mvxSubmit.removeClass('hidden');
+                    $(e.target).addClass('hidden');
+                }
+            } else {
+                alert('Select a valid product category.');
             }
         }
 
-        // if (this.productDescription.text() == ''){
-        //     alert('Give your service a description.');
-        // }
+        
         
         
         
@@ -235,8 +243,12 @@ class AddProductExtension {
             this.physicalZineCheckbox.prop('checked', false);
             this.downloadableDiv.removeClass('block');
             this.downloadableDiv.attr('style', 'display: none');
+            this.mvxSubmit.addClass('hidden');
+            this.reviewButton.removeClass('hidden');
         } else {
             this.virtualCheckbox.prop('checked', false);
+            this.mvxSubmit.addClass('hidden');
+            this.reviewButton.removeClass('hidden');
         }
     }
 
@@ -258,6 +270,7 @@ class AddProductExtension {
             this.taxStatusDropdown.val('taxable');
             this.digitalZineCheckbox.prop('checked', false);
             this.physicalZineCheckbox.prop('checked', false);
+            this.serviceCatCheckbox.prop('checked', false);
             this.downloadableDiv.removeClass('block');
             this.downloadableDiv.attr('style', 'display: none');
             this.mvxSubmit.addClass('hidden');
@@ -288,6 +301,7 @@ class AddProductExtension {
             this.taxStatusDropdown.val('taxable');
             this.digitalZineCheckbox.prop('checked', false);
             this.physicalZineCheckbox.prop('checked', false);
+            this.serviceCatCheckbox.prop('checked', false);
             this.downloadableDiv.removeClass('block');
             this.downloadableDiv.attr('style', 'display: none');
             this.mvxSubmit.addClass('hidden');
@@ -367,6 +381,7 @@ class AddProductExtension {
             this.hardcoverCatCheckbox.prop('checked', false);
             this.uncategorizedCatCheckbox.prop('checked', false);
             this.ebookCatCheckbox.prop('checked', false);
+            this.serviceCatCheckbox.prop('checked', false);
             this.audiobookCatCheckbox.prop('checked', false);
             this.manageStockCheckbox.prop('checked', true);
             this.stockFieldGroup.css('display', 'block');
