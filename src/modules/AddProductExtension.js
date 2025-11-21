@@ -60,68 +60,77 @@ class AddProductExtension {
         if (this.titleInput.val() == ''){
             alert('Give your product a title');
         } else {
-            if ((this.audiobookCatCheckbox.is(":checked") == false) && (this.ebookCatCheckbox.is(":checked") == false) && (this.digitalZineCheckbox.is(":checked") == false) && (this.paperbackCatCheckbox.is(":checked") == false) && (this.hardcoverCatCheckbox.is(":checked") == false) && (this.physicalZineCheckbox.is(":checked") == false) && (this.serviceCatCheckbox.is(":checked") == false)){
-                alert('Select your product category.');
+            if (this.regularPrice.val() == ''){
+                alert('Give your product a price. If you want to make it free, please set the price to 0.');
             } else {
-                if (this.audiobookCatCheckbox.is(":checked")){
-                    if ($('td.file_url_choose').length < 1){
-                        alert('Click the Add File button and add your audiobook file.');
-                    } else if ($('td.file_url > input').val() == '') {
-                        alert('Add your audiobook file.');
-                    } else {
-                        this.mvxSubmit.removeClass('hidden');
-                        $(e.target).addClass('hidden');
-                    }
-                } else if (this.ebookCatCheckbox.is(":checked")){
-                    if ($('td.file_url_choose').length < 1){
-                        alert('Click the Add File button and add your ebook file.');
-                    } else if ($('td.file_url > input').val() == '') {
-                        alert('Add your ebook file.');
-                    } else {
-                        this.mvxSubmit.removeClass('hidden');
-                        $(e.target).addClass('hidden');
-                    }
-                } else if (this.digitalZineCheckbox.is(":checked")){
-                    if ($('td.file_url_choose').length < 1){
-                        alert('Click the Add File button and add your digital zine file.');
-                    } else if ($('td.file_url > input').val() == '') {
-                        alert('Add your digital zine file.');
-                    } else {
-                        this.mvxSubmit.removeClass('hidden');
-                        $(e.target).addClass('hidden');
-                    }
-                } else if (this.paperbackCatCheckbox.is(":checked")){
-                    if (this.stockInput.val() == '' || Number(this.stockInput.val()) == 0 || isNaN(this.stockInput.val())){
-                        alert('Enter the number of paperback books you have ready to ship in the Stock field on the Inventory tab. Enter the paperback weight in the Shipping tab.');
-                    } else {
-                        this.mvxSubmit.removeClass('hidden');
-                        $(e.target).addClass('hidden');
-                    }
-                } else if (this.hardcoverCatCheckbox.is(":checked")){
-                    if (this.stockInput.val() == '' || Number(this.stockInput.val()) == 0 || isNaN(this.stockInput.val())){
-                        alert('Enter the number of hardcover books you have ready to ship in the Stock field on the Inventory tab. Enter the hardcover weight in the Shipping tab.');
-                    } else {
-                        this.mvxSubmit.removeClass('hidden');
-                        $(e.target).addClass('hidden');
-                    }
-                } else if (this.physicalZineCheckbox.is(":checked")){
-                    if (this.stockInput.val() == '' || Number(this.stockInput.val()) == 0 || isNaN(this.stockInput.val())){
-                        alert('Enter the number of zines you have ready to ship in the Stock field on the Inventory tab.');
-                        this.stockInput.val(0);
-                    } else {
-                        this.mvxSubmit.removeClass('hidden');
-                        $(e.target).addClass('hidden');
-                    }
-                } else if (this.serviceCatCheckbox.is(":checked")){
-                    let productDescription = tinymce.activeEditor.getContent();
-                    if (productDescription == ''){
-                        alert('Give your service a description.');
-                    } else {
-                        this.mvxSubmit.removeClass('hidden');
-                        $(e.target).addClass('hidden');
-                    }
+                let imgSrc = $('a.upload_image_button img').attr('src');
+                if (imgSrc.indexOf('/woocommerce-placeholder') !== -1){
+                    alert('Upload an image for your product.');
                 } else {
-                    alert('Select a valid product category.');
+                    if ((this.audiobookCatCheckbox.is(":checked") == false) && (this.ebookCatCheckbox.is(":checked") == false) && (this.digitalZineCheckbox.is(":checked") == false) && (this.paperbackCatCheckbox.is(":checked") == false) && (this.hardcoverCatCheckbox.is(":checked") == false) && (this.physicalZineCheckbox.is(":checked") == false) && (this.serviceCatCheckbox.is(":checked") == false)){
+                        alert('Select your product category.');
+                    } else {
+                        if (this.audiobookCatCheckbox.is(":checked")){
+                            if ($('td.file_url_choose').length < 1){
+                                alert('Click the Add File button and add your audiobook file.');
+                            } else if ($('td.file_url > input').val() == '') {
+                                alert('Add your audiobook file.');
+                            } else {
+                                this.mvxSubmit.removeClass('hidden');
+                                $(e.target).addClass('hidden');
+                            }
+                        } else if (this.ebookCatCheckbox.is(":checked")){
+                            if ($('td.file_url_choose').length < 1){
+                                alert('Click the Add File button and add your ebook file.');
+                            } else if ($('td.file_url > input').val() == '') {
+                                alert('Add your ebook file.');
+                            } else {
+                                this.mvxSubmit.removeClass('hidden');
+                                $(e.target).addClass('hidden');
+                            }
+                        } else if (this.digitalZineCheckbox.is(":checked")){
+                            if ($('td.file_url_choose').length < 1){
+                                alert('Click the Add File button and add your digital zine file.');
+                            } else if ($('td.file_url > input').val() == '') {
+                                alert('Add your digital zine file.');
+                            } else {
+                                this.mvxSubmit.removeClass('hidden');
+                                $(e.target).addClass('hidden');
+                            }
+                        } else if (this.paperbackCatCheckbox.is(":checked")){
+                            if (this.stockInput.val() == '' || Number(this.stockInput.val()) == 0 || isNaN(this.stockInput.val())){
+                                alert('Enter the number of paperback books you have ready to ship in the Stock field on the Inventory tab. Enter the paperback weight in the Shipping tab.');
+                            } else {
+                                this.mvxSubmit.removeClass('hidden');
+                                $(e.target).addClass('hidden');
+                            }
+                        } else if (this.hardcoverCatCheckbox.is(":checked")){
+                            if (this.stockInput.val() == '' || Number(this.stockInput.val()) == 0 || isNaN(this.stockInput.val())){
+                                alert('Enter the number of hardcover books you have ready to ship in the Stock field on the Inventory tab. Enter the hardcover weight in the Shipping tab.');
+                            } else {
+                                this.mvxSubmit.removeClass('hidden');
+                                $(e.target).addClass('hidden');
+                            }
+                        } else if (this.physicalZineCheckbox.is(":checked")){
+                            if (this.stockInput.val() == '' || Number(this.stockInput.val()) == 0 || isNaN(this.stockInput.val())){
+                                alert('Enter the number of zines you have ready to ship in the Stock field on the Inventory tab.');
+                                this.stockInput.val(0);
+                            } else {
+                                this.mvxSubmit.removeClass('hidden');
+                                $(e.target).addClass('hidden');
+                            }
+                        } else if (this.serviceCatCheckbox.is(":checked")){
+                            let productDescription = tinymce.activeEditor.getContent();
+                            if (productDescription == ''){
+                                alert('Give your service a description.');
+                            } else {
+                                this.mvxSubmit.removeClass('hidden');
+                                $(e.target).addClass('hidden');
+                            }
+                        } else {
+                            alert('Select a valid product category.');
+                        }
+                    }
                 }
             }
         }
