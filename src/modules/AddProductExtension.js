@@ -56,7 +56,7 @@ class AddProductExtension {
         this.reviewButton.on('click', this.reviewBookInfo.bind(this));
     }
 
-    reviewBookInfo(){
+    reviewBookInfo(e){
         if ((this.audiobookCatCheckbox.is(":checked") == false) && (this.ebookCatCheckbox.is(":checked") == false) && (this.digitalZineCheckbox.is(":checked") == false) && (this.paperbackCatCheckbox.is(":checked") == false) && (this.hardcoverCatCheckbox.is(":checked") == false) && (this.physicalZineCheckbox.is(":checked") == false) && (this.serviceCatCheckbox.is(":checked") == false)){
             alert('Select your product category.');
         } else {
@@ -67,6 +67,7 @@ class AddProductExtension {
                     alert('Add your audiobook file.');
                 } else {
                     this.mvxSubmit.removeClass('hidden');
+                    $(e.target).addClass('hidden');
                 }
             } else if (this.ebookCatCheckbox.is(":checked")){
                 if ($('td.file_url_choose').length < 1){
@@ -75,6 +76,16 @@ class AddProductExtension {
                     alert('Add your ebook file.');
                 } else {
                     this.mvxSubmit.removeClass('hidden');
+                    $(e.target).addClass('hidden');
+                }
+            } else if (this.digitalZineCheckbox.is(":checked")){
+                if ($('td.file_url_choose').length < 1){
+                    alert('Click the Add File button and add your digital zine file.');
+                } else if ($('td.file_url > input').val() == '') {
+                    alert('Add your digital zine file.');
+                } else {
+                    this.mvxSubmit.removeClass('hidden');
+                    $(e.target).addClass('hidden');
                 }
             }
         }
@@ -89,15 +100,14 @@ class AddProductExtension {
         // if (this.stockInput.val() == '' || Number(this.stockInput.val()) == 0 || isNaN(this.stockInput.val())){
         //     alert('Enter the number of paperback books you have ready to ship in the Stock field on the Inventory tab. Enter the paperback weight in the Shipping tab.');
         // }
-        // if ($('td.file_url_choose').length < 1){
-        //     alert('Click the Add File button and add your digital zine file.');
-        // } else if ($('td.file_url > input').val() == '') {
-        //     alert('Add your digital zine file.');
-        // }
+        
         
         // if (this.stockInput.val() == '' || Number(this.stockInput.val()) == 0 || isNaN(this.stockInput.val())){
         //     alert('Enter the number of zines you have ready to ship in the Stock field on the Inventory tab.');
         //     this.stockInput.val(0);
+        // } else {
+        //     this.mvxSubmit.removeClass('hidden');
+        //     $(e.target).addClass('hidden');
         // }
     }
 
@@ -286,6 +296,8 @@ class AddProductExtension {
             this.physicalZineCheckbox.prop('checked', false);
             this.downloadableDiv.addClass('block');
             this.downloadableDiv.attr('style', 'display: block');
+            this.mvxSubmit.addClass('hidden');
+            this.reviewButton.removeClass('hidden');
             // if ($('td.file_url_choose').length < 1){
             //     alert('Click the Add File button and add your ebook file.');
             // } else if ($('td.file_url > input').val() == '') {
@@ -294,6 +306,7 @@ class AddProductExtension {
         } else {
             this.downloadableCheckbox.prop('checked', false);
             this.mvxSubmit.addClass('hidden');
+            this.reviewButton.removeClass('hidden');
         }
     }
 
@@ -313,6 +326,8 @@ class AddProductExtension {
             this.ebookCatCheckbox.prop('checked', false);
             this.downloadableDiv.addClass('block');
             this.downloadableDiv.attr('style', 'display: block');
+            this.mvxSubmit.addClass('hidden');
+            this.reviewButton.removeClass('hidden');
             // if ($('td.file_url_choose').length < 1){
             //     alert('Click the Add File button and add your digital zine file.');
             // } else if ($('td.file_url > input').val() == '') {
@@ -320,6 +335,8 @@ class AddProductExtension {
             // }
         } else {
             this.downloadableCheckbox.prop('checked', false);
+            this.mvxSubmit.addClass('hidden');
+            this.reviewButton.removeClass('hidden');
         }
     }
 
@@ -365,6 +382,8 @@ class AddProductExtension {
             this.physicalZineCheckbox.prop('checked', false);
             this.downloadableDiv.addClass('block');
             this.downloadableDiv.attr('style', 'display: block');
+            this.mvxSubmit.addClass('hidden');
+            this.reviewButton.removeClass('hidden');
             // if ($('td.file_url_choose').length < 1){
             //     alert('Click the Add File button and add your audiobook file.');
             // } else if ($('td.file_url > input').val() == '') {
@@ -373,7 +392,7 @@ class AddProductExtension {
         } else {
             this.downloadableCheckbox.prop('checked', false);
             this.mvxSubmit.addClass('hidden');
-            console.log('we need to hide the submit button')
+            this.reviewButton.removeClass('hidden');
         }
     }
 
