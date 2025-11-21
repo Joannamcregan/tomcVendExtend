@@ -87,19 +87,29 @@ class AddProductExtension {
                     this.mvxSubmit.removeClass('hidden');
                     $(e.target).addClass('hidden');
                 }
+            } else if (this.paperbackCatCheckbox.is(":checked")){
+                if (this.stockInput.val() == '' || Number(this.stockInput.val()) == 0 || isNaN(this.stockInput.val())){
+                    alert('Enter the number of paperback books you have ready to ship in the Stock field on the Inventory tab. Enter the paperback weight in the Shipping tab.');
+                } else {
+                    this.mvxSubmit.removeClass('hidden');
+                    $(e.target).addClass('hidden');
+                }
+            } else if (this.hardcoverCatCheckbox.is(":checked")){
+                if (this.stockInput.val() == '' || Number(this.stockInput.val()) == 0 || isNaN(this.stockInput.val())){
+                    alert('Enter the number of hardcover books you have ready to ship in the Stock field on the Inventory tab. Enter the hardcover weight in the Shipping tab.');
+                } else {
+                    this.mvxSubmit.removeClass('hidden');
+                    $(e.target).addClass('hidden');
+                }
             }
         }
 
         // if (this.productDescription.text() == ''){
         //     alert('Give your service a description.');
         // }
-        // if (this.stockInput.val() == '' || Number(this.stockInput.val()) == 0 || isNaN(this.stockInput.val())){
-        //     alert('Enter the number of hardcover books you have ready to ship in the Stock field on the Inventory tab. Enter the hardcover weight in the Shipping tab.');
-        // }
         
-        // if (this.stockInput.val() == '' || Number(this.stockInput.val()) == 0 || isNaN(this.stockInput.val())){
-        //     alert('Enter the number of paperback books you have ready to ship in the Stock field on the Inventory tab. Enter the paperback weight in the Shipping tab.');
-        // }
+        
+        
         
         
         // if (this.stockInput.val() == '' || Number(this.stockInput.val()) == 0 || isNaN(this.stockInput.val())){
@@ -248,9 +258,13 @@ class AddProductExtension {
             this.physicalZineCheckbox.prop('checked', false);
             this.downloadableDiv.removeClass('block');
             this.downloadableDiv.attr('style', 'display: none');
+            this.mvxSubmit.addClass('hidden');
+            this.reviewButton.removeClass('hidden');
         } else {
             this.manageStockCheckbox.prop('checked', false);
             this.stockFieldGroup.css('display', 'none');
+            this.mvxSubmit.addClass('hidden');
+            this.reviewButton.removeClass('hidden');
         }
     }
 
@@ -274,9 +288,13 @@ class AddProductExtension {
             this.physicalZineCheckbox.prop('checked', false);
             this.downloadableDiv.removeClass('block');
             this.downloadableDiv.attr('style', 'display: none');
+            this.mvxSubmit.addClass('hidden');
+            this.reviewButton.removeClass('hidden');
         } else {
             this.manageStockCheckbox.prop('checked', false);
             this.stockFieldGroup.css('display', 'none');
+            this.mvxSubmit.addClass('hidden');
+            this.reviewButton.removeClass('hidden');
         }
     }
 
