@@ -32,6 +32,7 @@ class AddProductExtension {
         this.weightField = $('#shipping_product_data input#_weight');
         this.perProductInsert = $('#shipping_product_data a.insert');
         this.reviewButton = $('#tomc_mvx_frontend_dashboard_product_check');
+        this.uploadImgButton = $('a.upload_image_button');
         this.events();
     }
 
@@ -54,6 +55,10 @@ class AddProductExtension {
         this.couponTitle.on('change', this.styleDashboardCouponOptions.bind(this));
         this.weightField.on('change', this.addShippingByWeight.bind(this));
         this.reviewButton.on('click', this.reviewBookInfo.bind(this));
+        this.uploadImgButton.on('click', ()=>{
+            this.reviewButton.removeClass('hidden');
+            this.mvxSubmit.addClass('hidden');
+        })
     }
 
     reviewBookInfo(e){
