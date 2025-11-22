@@ -18,7 +18,7 @@ class AddProductExtension {
         this.hardcoverCatCheckbox = $('ul.product_cat input[value=85]'); //50 for dev, 85 for prod
         this.ebookCatCheckbox = $('ul.product_cat input[value=49]'); //48 for dev, 49 for prod
         this.audiobookCatCheckbox = $('ul.product_cat input[value=50]'); //49 for dev, 50 for prod
-        this.physicalZineCheckbox = $('ul.product_cat input[value=76]'); //55 for dev, 76 for prod
+        this.physicalZineCheckbox = $('ul.product_cat input[value=86]'); //55 for dev, 86 for prod
         this.digitalZineCheckbox = $('ul.product_cat input[value=75]'); //56 for dev, 75 for prod
         this.uncategorizedCatCheckbox = $('ul.product_cat input[value=16]'); //16 for dev, somehow also 16 for prod
         this.catCheckboxes = $('ul.product_cat input[type=checkbox]');
