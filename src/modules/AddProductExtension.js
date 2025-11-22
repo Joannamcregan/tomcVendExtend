@@ -105,6 +105,8 @@ class AddProductExtension {
                         } else if (this.paperbackCatCheckbox.is(":checked")){
                             if (this.stockInput.val() == '' || Number(this.stockInput.val()) == 0 || isNaN(this.stockInput.val())){
                                 alert('Enter the number of paperback books you have ready to ship in the Stock field on the Inventory tab. Enter the paperback weight in the Shipping tab.');
+                            } else if (this.weightField.val() == ''){
+                                alert("Enter your book's weight.");
                             } else {
                                 this.mvxSubmit.removeClass('hidden');
                                 $(e.target).addClass('hidden');
@@ -112,6 +114,8 @@ class AddProductExtension {
                         } else if (this.hardcoverCatCheckbox.is(":checked")){
                             if (this.stockInput.val() == '' || Number(this.stockInput.val()) == 0 || isNaN(this.stockInput.val())){
                                 alert('Enter the number of hardcover books you have ready to ship in the Stock field on the Inventory tab. Enter the hardcover weight in the Shipping tab.');
+                            } else if (this.weightField.val() == ''){
+                                alert("Enter your book's weight.");
                             } else {
                                 this.mvxSubmit.removeClass('hidden');
                                 $(e.target).addClass('hidden');
@@ -120,6 +124,8 @@ class AddProductExtension {
                             if (this.stockInput.val() == '' || Number(this.stockInput.val()) == 0 || isNaN(this.stockInput.val())){
                                 alert('Enter the number of zines you have ready to ship in the Stock field on the Inventory tab.');
                                 this.stockInput.val(0);
+                            } else if (this.weightField.val() == ''){
+                                alert("Enter your zine's weight.");
                             } else {
                                 this.mvxSubmit.removeClass('hidden');
                                 $(e.target).addClass('hidden');
@@ -194,6 +200,8 @@ class AddProductExtension {
         } else {
             alert('More than 15 lbs? Visit https://www.usps.com/ship/mail-shipping-services.htm#mediamail for rate info.')
         }
+        this.mvxSubmit.addClass('hidden');
+        this.reviewButton.removeClass('hidden');
     }
 
     styleDashboardCouponOptions() {
