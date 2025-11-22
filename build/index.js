@@ -18,8 +18,8 @@ __webpack_require__.r(__webpack_exports__);
 class AddProductExtension {
   constructor() {
     this.mvxSubmit = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input#mvx_frontend_dashboard_product_submit');
-    this.titleInput = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input#post_title');
-    this.productDescription = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tinymce p');
+    // this.titleInput = $('input#post_title');
+    // this.productDescription = $('#tinymce');
     this.scheduleSaleButton = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".sale_schedule");
     this.regularPrice = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#_regular_price');
     this.salePrice = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#_sale_price');
@@ -30,13 +30,13 @@ class AddProductExtension {
     this.productTitleSection = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.product-title-wrap');
     this.virtualCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input#_virtual');
     this.downloadableCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input#_downloadable');
-    this.serviceCatCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=53]'); //53 for dev, somehow also 53 for prod
-    this.paperbackCatCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=84]'); //51 for dev, 84 for prod
-    this.hardcoverCatCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=85]'); //50 for dev, 85 for prod
-    this.ebookCatCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=49]'); //51 for dev, 49 for prod
-    this.audiobookCatCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=50]'); //49 for dev, 50 for prod
-    this.physicalZineCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=76]');
-    this.digitalZineCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=75]');
+    this.serviceCatCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=58]'); //58 for dev, 53 for prod
+    this.paperbackCatCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=51]'); //51 for dev, 84 for prod
+    this.hardcoverCatCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=50]'); //50 for dev, 85 for prod
+    this.ebookCatCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=48]'); //48 for dev, 49 for prod
+    this.audiobookCatCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=49]'); //49 for dev, 50 for prod
+    this.physicalZineCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=55]'); //55 for dev, 76 for prod
+    this.digitalZineCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=56]'); //56 for dev, 75 for prod
     this.uncategorizedCatCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=16]'); //16 for dev, somehow also 16 for prod
     this.catCheckboxes = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[type=checkbox]');
     this.taxStatusDropdown = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#_tax_status');
@@ -46,6 +46,8 @@ class AddProductExtension {
     this.couponTitle = jquery__WEBPACK_IMPORTED_MODULE_0___default()('div.coupon-primary-info input#post_title');
     this.weightField = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#shipping_product_data input#_weight');
     this.perProductInsert = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#shipping_product_data a.insert');
+    this.reviewButton = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc_mvx_frontend_dashboard_product_check');
+    this.uploadImgButton = jquery__WEBPACK_IMPORTED_MODULE_0___default()('a.upload_image_button');
     this.events();
   }
   events() {
@@ -66,6 +68,96 @@ class AddProductExtension {
     this.titleInput.on('click', this.setTaxInfo.bind(this));
     this.couponTitle.on('change', this.styleDashboardCouponOptions.bind(this));
     this.weightField.on('change', this.addShippingByWeight.bind(this));
+    this.reviewButton.on('click', this.reviewBookInfo.bind(this));
+    this.uploadImgButton.on('click', () => {
+      this.reviewButton.removeClass('hidden');
+      this.mvxSubmit.addClass('hidden');
+    });
+  }
+  reviewBookInfo(e) {
+    if (this.titleInput.val() == '') {
+      alert('Give your product a title');
+    } else {
+      if (this.regularPrice.val() == '') {
+        alert('Give your product a price. If you want to make it free, please set the price to 0.');
+      } else {
+        let imgSrc = jquery__WEBPACK_IMPORTED_MODULE_0___default()('a.upload_image_button img').attr('src');
+        if (imgSrc.indexOf('/woocommerce-placeholder') !== -1) {
+          alert('Upload an image for your product.');
+        } else {
+          if (this.audiobookCatCheckbox.is(":checked") == false && this.ebookCatCheckbox.is(":checked") == false && this.digitalZineCheckbox.is(":checked") == false && this.paperbackCatCheckbox.is(":checked") == false && this.hardcoverCatCheckbox.is(":checked") == false && this.physicalZineCheckbox.is(":checked") == false && this.serviceCatCheckbox.is(":checked") == false) {
+            alert('Select your product category.');
+          } else {
+            if (this.audiobookCatCheckbox.is(":checked")) {
+              if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('td.file_url_choose').length < 1) {
+                alert('Click the Add File button and add your audiobook file.');
+              } else if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('td.file_url > input').val() == '') {
+                alert('Add your audiobook file.');
+              } else {
+                this.mvxSubmit.removeClass('hidden');
+                jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).addClass('hidden');
+              }
+            } else if (this.ebookCatCheckbox.is(":checked")) {
+              if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('td.file_url_choose').length < 1) {
+                alert('Click the Add File button and add your ebook file.');
+              } else if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('td.file_url > input').val() == '') {
+                alert('Add your ebook file.');
+              } else {
+                this.mvxSubmit.removeClass('hidden');
+                jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).addClass('hidden');
+              }
+            } else if (this.digitalZineCheckbox.is(":checked")) {
+              if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('td.file_url_choose').length < 1) {
+                alert('Click the Add File button and add your digital zine file.');
+              } else if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('td.file_url > input').val() == '') {
+                alert('Add your digital zine file.');
+              } else {
+                this.mvxSubmit.removeClass('hidden');
+                jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).addClass('hidden');
+              }
+            } else if (this.paperbackCatCheckbox.is(":checked")) {
+              if (this.stockInput.val() == '' || Number(this.stockInput.val()) == 0 || isNaN(this.stockInput.val())) {
+                alert('Enter the number of paperback books you have ready to ship in the Stock field on the Inventory tab. Enter the paperback weight in the Shipping tab.');
+              } else if (this.weightField.val() == '') {
+                alert("Enter your book's weight.");
+              } else {
+                this.mvxSubmit.removeClass('hidden');
+                jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).addClass('hidden');
+              }
+            } else if (this.hardcoverCatCheckbox.is(":checked")) {
+              if (this.stockInput.val() == '' || Number(this.stockInput.val()) == 0 || isNaN(this.stockInput.val())) {
+                alert('Enter the number of hardcover books you have ready to ship in the Stock field on the Inventory tab. Enter the hardcover weight in the Shipping tab.');
+              } else if (this.weightField.val() == '') {
+                alert("Enter your book's weight.");
+              } else {
+                this.mvxSubmit.removeClass('hidden');
+                jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).addClass('hidden');
+              }
+            } else if (this.physicalZineCheckbox.is(":checked")) {
+              if (this.stockInput.val() == '' || Number(this.stockInput.val()) == 0 || isNaN(this.stockInput.val())) {
+                alert('Enter the number of zines you have ready to ship in the Stock field on the Inventory tab.');
+                this.stockInput.val(0);
+              } else if (this.weightField.val() == '') {
+                alert("Enter your zine's weight.");
+              } else {
+                this.mvxSubmit.removeClass('hidden');
+                jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).addClass('hidden');
+              }
+            } else if (this.serviceCatCheckbox.is(":checked")) {
+              let productDescription = tinymce.activeEditor.getContent();
+              if (productDescription == '') {
+                alert('Give your service a description.');
+              } else {
+                this.mvxSubmit.removeClass('hidden');
+                jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).addClass('hidden');
+              }
+            } else {
+              alert('Select a valid product category.');
+            }
+          }
+        }
+      }
+    }
   }
   addShippingByWeight(e) {
     let weight = parseFloat(jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).val());
@@ -120,6 +212,8 @@ class AddProductExtension {
     } else {
       alert('More than 15 lbs? Visit https://www.usps.com/ship/mail-shipping-services.htm#mediamail for rate info.');
     }
+    this.mvxSubmit.addClass('hidden');
+    this.reviewButton.removeClass('hidden');
   }
   styleDashboardCouponOptions() {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('option[value="fixed_product"]').prop('selected', 'selected');
@@ -133,6 +227,8 @@ class AddProductExtension {
       this.taxClassDropdown.val('physical-books-35010000');
     }
     this.taxStatusDropdown.val('taxable');
+    this.mvxSubmit.addClass('hidden');
+    this.reviewButton.removeClass('hidden');
   }
   resetTaxClass() {
     if (this.downloadableCheckbox.is(":checked")) {
@@ -164,17 +260,21 @@ class AddProductExtension {
       this.uncategorizedCatCheckbox.prop('checked', false);
       this.ebookCatCheckbox.prop('checked', false);
       this.audiobookCatCheckbox.prop('checked', false);
-      if (this.productDescription.text() == '') {
-        alert('Give your service a description.');
-      }
+      // if (this.productDescription.text() == ''){
+      //     alert('Give your service a description.');
+      // }
       this.taxClassDropdown.val('services-20030000');
       this.taxStatusDropdown.val('taxable');
       this.digitalZineCheckbox.prop('checked', false);
       this.physicalZineCheckbox.prop('checked', false);
       this.downloadableDiv.removeClass('block');
       this.downloadableDiv.attr('style', 'display: none');
+      this.mvxSubmit.addClass('hidden');
+      this.reviewButton.removeClass('hidden');
     } else {
       this.virtualCheckbox.prop('checked', false);
+      this.mvxSubmit.addClass('hidden');
+      this.reviewButton.removeClass('hidden');
     }
   }
   updateCheckboxesHardcover() {
@@ -188,18 +288,23 @@ class AddProductExtension {
       this.manageStockCheckbox.prop('checked', true);
       this.stockFieldGroup.css('display', 'block');
       if (this.stockInput.val() == '' || Number(this.stockInput.val()) == 0 || isNaN(this.stockInput.val())) {
-        alert('Enter the number of hardcover books you have ready to ship in the Stock field on the Inventory tab. Enter the hardcover weight in the Shipping tab.');
+        // alert('Enter the number of hardcover books you have ready to ship in the Stock field on the Inventory tab. Enter the hardcover weight in the Shipping tab.');
         this.stockInput.val(0);
       }
       this.taxClassDropdown.val('physical-books-35010000');
       this.taxStatusDropdown.val('taxable');
       this.digitalZineCheckbox.prop('checked', false);
       this.physicalZineCheckbox.prop('checked', false);
+      this.serviceCatCheckbox.prop('checked', false);
       this.downloadableDiv.removeClass('block');
       this.downloadableDiv.attr('style', 'display: none');
+      this.mvxSubmit.addClass('hidden');
+      this.reviewButton.removeClass('hidden');
     } else {
       this.manageStockCheckbox.prop('checked', false);
       this.stockFieldGroup.css('display', 'none');
+      this.mvxSubmit.addClass('hidden');
+      this.reviewButton.removeClass('hidden');
     }
   }
   updateCheckboxesPaperback() {
@@ -213,18 +318,23 @@ class AddProductExtension {
       this.manageStockCheckbox.prop('checked', true);
       this.stockFieldGroup.css('display', 'block');
       if (this.stockInput.val() == '' || Number(this.stockInput.val()) == 0 || isNaN(this.stockInput.val())) {
-        alert('Enter the number of paperback books you have ready to ship in the Stock field on the Inventory tab. Enter the paperback weight in the Shipping tab.');
+        // alert('Enter the number of paperback books you have ready to ship in the Stock field on the Inventory tab. Enter the paperback weight in the Shipping tab.');
         this.stockInput.val(0);
       }
       this.taxClassDropdown.val('physical-books-35010000');
       this.taxStatusDropdown.val('taxable');
       this.digitalZineCheckbox.prop('checked', false);
       this.physicalZineCheckbox.prop('checked', false);
+      this.serviceCatCheckbox.prop('checked', false);
       this.downloadableDiv.removeClass('block');
       this.downloadableDiv.attr('style', 'display: none');
+      this.mvxSubmit.addClass('hidden');
+      this.reviewButton.removeClass('hidden');
     } else {
       this.manageStockCheckbox.prop('checked', false);
       this.stockFieldGroup.css('display', 'none');
+      this.mvxSubmit.addClass('hidden');
+      this.reviewButton.removeClass('hidden');
     }
   }
   updateCheckboxesEbook() {
@@ -243,13 +353,17 @@ class AddProductExtension {
       this.physicalZineCheckbox.prop('checked', false);
       this.downloadableDiv.addClass('block');
       this.downloadableDiv.attr('style', 'display: block');
-      if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('td.file_url_choose').length < 1) {
-        alert('Click the Add File button and add your ebook file.');
-      } else if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('td.file_url > input').val() == '') {
-        alert('Add your ebook file.');
-      }
+      this.mvxSubmit.addClass('hidden');
+      this.reviewButton.removeClass('hidden');
+      // if ($('td.file_url_choose').length < 1){
+      //     alert('Click the Add File button and add your ebook file.');
+      // } else if ($('td.file_url > input').val() == '') {
+      //     alert('Add your ebook file.');
+      // }
     } else {
       this.downloadableCheckbox.prop('checked', false);
+      this.mvxSubmit.addClass('hidden');
+      this.reviewButton.removeClass('hidden');
     }
   }
   updateCheckboxesDigitalZine() {
@@ -268,13 +382,17 @@ class AddProductExtension {
       this.ebookCatCheckbox.prop('checked', false);
       this.downloadableDiv.addClass('block');
       this.downloadableDiv.attr('style', 'display: block');
-      if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('td.file_url_choose').length < 1) {
-        alert('Click the Add File button and add your digital zine file.');
-      } else if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('td.file_url > input').val() == '') {
-        alert('Add your digital zine file.');
-      }
+      this.mvxSubmit.addClass('hidden');
+      this.reviewButton.removeClass('hidden');
+      // if ($('td.file_url_choose').length < 1){
+      //     alert('Click the Add File button and add your digital zine file.');
+      // } else if ($('td.file_url > input').val() == '') {
+      //     alert('Add your digital zine file.');
+      // }
     } else {
       this.downloadableCheckbox.prop('checked', false);
+      this.mvxSubmit.addClass('hidden');
+      this.reviewButton.removeClass('hidden');
     }
   }
   updateCheckboxesPhysicalZine() {
@@ -284,11 +402,12 @@ class AddProductExtension {
       this.hardcoverCatCheckbox.prop('checked', false);
       this.uncategorizedCatCheckbox.prop('checked', false);
       this.ebookCatCheckbox.prop('checked', false);
+      this.serviceCatCheckbox.prop('checked', false);
       this.audiobookCatCheckbox.prop('checked', false);
       this.manageStockCheckbox.prop('checked', true);
       this.stockFieldGroup.css('display', 'block');
       if (this.stockInput.val() == '' || Number(this.stockInput.val()) == 0 || isNaN(this.stockInput.val())) {
-        alert('Enter the number of zines you have ready to ship in the Stock field on the Inventory tab.');
+        // alert('Enter the number of zines you have ready to ship in the Stock field on the Inventory tab.');
         this.stockInput.val(0);
       }
       this.taxClassDropdown.val('physical-books-35010000');
@@ -297,9 +416,13 @@ class AddProductExtension {
       this.digitalZineCheckbox.prop('checked', false);
       this.downloadableDiv.removeClass('block');
       this.downloadableDiv.attr('style', 'display: none');
+      this.mvxSubmit.addClass('hidden');
+      this.reviewButton.removeClass('hidden');
     } else {
       this.manageStockCheckbox.prop('checked', false);
       this.stockFieldGroup.css('display', 'none');
+      this.mvxSubmit.addClass('hidden');
+      this.reviewButton.removeClass('hidden');
     }
   }
   updateCheckboxesAudiobook() {
@@ -318,13 +441,17 @@ class AddProductExtension {
       this.physicalZineCheckbox.prop('checked', false);
       this.downloadableDiv.addClass('block');
       this.downloadableDiv.attr('style', 'display: block');
-      if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('td.file_url_choose').length < 1) {
-        alert('Click the Add File button and add your audiobook file.');
-      } else if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('td.file_url > input').val() == '') {
-        alert('Add your audiobook file.');
-      }
+      this.mvxSubmit.addClass('hidden');
+      this.reviewButton.removeClass('hidden');
+      // if ($('td.file_url_choose').length < 1){
+      //     alert('Click the Add File button and add your audiobook file.');
+      // } else if ($('td.file_url > input').val() == '') {
+      //     alert('Add your audiobook file.');
+      // }
     } else {
       this.downloadableCheckbox.prop('checked', false);
+      this.mvxSubmit.addClass('hidden');
+      this.reviewButton.removeClass('hidden');
     }
   }
   updateCheckboxesDownloadable() {
