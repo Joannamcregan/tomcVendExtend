@@ -72,7 +72,15 @@ class AddProductExtension {
       this.mvxSubmit.addClass('hidden');
     });
   }
+  deleteProductFile() {
+    this.reviewButton.removeClass('hidden');
+    this.mvxSubmit.addClass('hidden');
+  }
   reviewBookInfo(e) {
+    if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('div.downloadable_files i.ico_delete_icon').length > -1) {
+      let deleteProductButton = jquery__WEBPACK_IMPORTED_MODULE_0___default()('div.downloadable_files a.delete');
+      deleteProductButton.on('click', this.deleteProductFile.bind(this));
+    }
     if (this.titleInput.val() == '') {
       alert('Give your product a title');
     } else {
