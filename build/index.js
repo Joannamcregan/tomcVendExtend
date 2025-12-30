@@ -529,6 +529,49 @@ class AddProductExtension {
 
 /***/ }),
 
+/***/ "./src/modules/NameYourPriceExtension.js":
+/*!***********************************************!*\
+  !*** ./src/modules/NameYourPriceExtension.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "jquery");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+
+class NYPExtension {
+  constructor() {
+    this.enableOverlay = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-mvx-nyp-enable--overlay');
+    this.enableOverlayCloseButton = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-mvx-nyp-enable--overlay svg.search-overlay__close');
+    this.enableOverlayLink = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-name-price-open-overlay');
+    this.enableOverlayCancel = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-mvx-nyp-cancel-button');
+    this.minPriceInput = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-mvx-nyp-min-price');
+    this.maxPriceInput = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-mvx-nyp-max-price');
+    this.enableButton = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-mvx-nyp-enable-button');
+    this.events();
+  }
+  events() {
+    this.enableOverlayCloseButton.on('click', this.closeEnableOverlay.bind(this));
+    this.enableOverlayCancel.on('click', this.closeEnableOverlay.bind(this));
+    this.enableOverlayLink.on('click', this.openEnableOverlay.bind(this));
+  }
+  closeEnableOverlay() {
+    this.enableOverlay.addClass('hidden');
+  }
+  openEnableOverlay(e) {
+    this.minPriceInput.val(jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).data('min'));
+    this.maxPriceInput.val(jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).data('max'));
+    this.enableButton.attr('data-id', jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).data('id'));
+    this.enableOverlay.removeClass('hidden');
+  }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NYPExtension);
+
+/***/ }),
+
 /***/ "jquery":
 /*!*************************!*\
   !*** external "jQuery" ***!
@@ -615,8 +658,11 @@ var __webpack_exports__ = {};
   \**********************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_AddProductExtension__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/AddProductExtension */ "./src/modules/AddProductExtension.js");
+/* harmony import */ var _modules_NameYourPriceExtension__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/NameYourPriceExtension */ "./src/modules/NameYourPriceExtension.js");
+
 
 const tomcAddProductExtension = new _modules_AddProductExtension__WEBPACK_IMPORTED_MODULE_0__["default"]();
+const tomcNYPExtension = new _modules_NameYourPriceExtension__WEBPACK_IMPORTED_MODULE_1__["default"]();
 })();
 
 /******/ })()
