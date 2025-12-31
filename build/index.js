@@ -547,16 +547,21 @@ class NYPExtension {
     this.enableOverlay = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-mvx-nyp-enable--overlay');
     this.enableOverlayCloseButton = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-mvx-nyp-enable--overlay svg.search-overlay__close');
     this.enableOverlayLink = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-name-price-open-overlay');
+    this.manageOverlayLink = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-name-price-manage-overlay');
     this.enableOverlayCancel = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-mvx-nyp-cancel-button');
     this.minPriceInput = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-mvx-nyp-min-price');
     this.maxPriceInput = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-mvx-nyp-max-price');
     this.enableButton = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-mvx-nyp-enable-button');
+    this.noMinError = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-mvx-nyp-enable--no-min-error');
+    this.lowMinWarning = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-mvx-nyp-enable--low-min-warning');
     this.events();
   }
   events() {
     this.enableOverlayCloseButton.on('click', this.closeEnableOverlay.bind(this));
     this.enableOverlayCancel.on('click', this.closeEnableOverlay.bind(this));
     this.enableOverlayLink.on('click', this.openEnableOverlay.bind(this));
+    this.manageOverlayLink.on('click', this.openEnableOverlay.bind(this));
+    this.enableButton.on('click', this.enableSettings.bind(this));
   }
   closeEnableOverlay() {
     this.enableOverlay.addClass('hidden');
@@ -565,7 +570,21 @@ class NYPExtension {
     this.minPriceInput.val(jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).data('min'));
     this.maxPriceInput.val(jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).data('max'));
     this.enableButton.attr('data-id', jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).data('id'));
+    this.enableButton.attr('data-category', jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).data('category'));
     this.enableOverlay.removeClass('hidden');
+  }
+  enableSettings(e) {
+    //move this into a function that conditionally shows/hides messages and enable button when the value in the min/max inputs is changed
+    if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).data('category') == 51 || jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).data('category') == 50) {
+      //paperback: 51 for dev, 84 for prod; hardcover: 50 for dev, 85 for prod
+      if (parseInt(this.minPriceInput.val, 10) < 1) {
+        this.noMinError.removeClass('hidden');
+        this.lowMinWarning.addClass('hidden');
+      } else if (parseInt(this.minPriceInput.val, 10) < 10) {
+        this.noMinError.addClass('hidden');
+        this.lowMinWarning.removeClass('hidden');
+      }
+    }
   }
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NYPExtension);
