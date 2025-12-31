@@ -554,6 +554,10 @@ class NYPExtension {
     this.enableButton = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-mvx-nyp-enable-button');
     this.noMinError = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-mvx-nyp-enable--no-min-error');
     this.lowMinWarning = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-mvx-nyp-enable--low-min-warning');
+    this.negativeMinError = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-mvx-nyp-enable--negative-min-error');
+    this.negativeMaxError = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-mvx-nyp-enable--negative-max-error');
+    this.lowerMaxError = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-mvx-nyp-enable--lower-max-error');
+    this.zeroMaxError = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-mvx-nyp-enable--zero-max-error');
     this.events();
   }
   events() {
@@ -562,6 +566,7 @@ class NYPExtension {
     this.enableOverlayLink.on('click', this.openEnableOverlay.bind(this));
     this.manageOverlayLink.on('click', this.openEnableOverlay.bind(this));
     this.enableButton.on('click', this.enableSettings.bind(this));
+    this.minPriceInput.on('change', this.validateMin.bind(this));
   }
   closeEnableOverlay() {
     this.enableOverlay.addClass('hidden');
@@ -572,10 +577,14 @@ class NYPExtension {
     this.enableButton.attr('data-id', jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).data('id'));
     this.enableButton.attr('data-category', jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).data('category'));
     this.enableOverlay.removeClass('hidden');
+    if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).data('category') == 49 || jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).data('category') == 50 || this.enableButton.data('category') == 86) {
+      this.noMinError.removeClass('hidden');
+      this.enableButton.addClass('hidden');
+    }
   }
   enableSettings(e) {
     //move this into a function that conditionally shows/hides messages and enable button when the value in the min/max inputs is changed
-    if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).data('category') == 51 || jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).data('category') == 50) {
+    if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).data('category') == 49 || jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).data('category') == 50 || this.enableButton.data('category') == 86) {
       //paperback: 51 for dev, 84 for prod; hardcover: 50 for dev, 85 for prod
       if (parseInt(this.minPriceInput.val, 10) < 1) {
         this.noMinError.removeClass('hidden');
@@ -584,6 +593,32 @@ class NYPExtension {
         this.noMinError.addClass('hidden');
         this.lowMinWarning.removeClass('hidden');
       }
+    }
+  }
+  validateMin() {
+    if (this.minPriceInput.val() != '') {
+      this.minPriceInput.val(parseInt(this.minPriceInput.val()));
+    }
+    if (this.enableButton.data('category') == 49 || this.enableButton.data('category') == 50 || this.enableButton.data('category') == 86) {
+      //paperbacks, hardcovers, physical zines
+      if (parseInt(this.minPriceInput.val(), 10) < 1 || this.minPriceInput.val() == '') {
+        this.noMinError.removeClass('hidden');
+        this.lowMinWarning.addClass('hidden');
+        this.enableButton.addClass('hidden');
+      } else if (parseInt(this.minPriceInput.val(), 10) < 10) {
+        this.noMinError.addClass('hidden');
+        this.lowMinWarning.removeClass('hidden');
+        this.enableButton.removeClass('hidden');
+      } else {
+        this.noMinError.addClass('hidden');
+        this.lowMinWarning.addClass('hidden');
+        this.enableButton.removeClass('hidden');
+      }
+    } else {
+      console.log(this.enableButton.data('category'));
+      this.noMinError.addClass('hidden');
+      this.lowMinWarning.addClass('hidden');
+      this.enableButton.removeClass('hidden');
     }
   }
 }
