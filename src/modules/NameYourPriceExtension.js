@@ -13,7 +13,6 @@ class NYPExtension {
         this.noMinError = $('#tomc-mvx-nyp-enable--no-min-error');
         this.lowMinWarning = $('#tomc-mvx-nyp-enable--low-min-warning');
         this.negativeMinError = $('#tomc-mvx-nyp-enable--negative-min-error');
-        this.negativeMaxError = $('#tomc-mvx-nyp-enable--negative-max-error');
         this.lowerMaxError = $('#tomc-mvx-nyp-enable--lower-max-error');
         this.zeroMaxError = $('#tomc-mvx-nyp-enable--zero-max-error');
         this.events();
@@ -26,6 +25,7 @@ class NYPExtension {
         this.manageOverlayLink.on('click', this.openEnableOverlay.bind(this));
         this.enableButton.on('click', this.enableSettings.bind(this));
         this.minPriceInput.on('change', this.validateMin.bind(this));
+        this.maxPriceInput.on('change', this.validateMax.bind(this));
     }
 
     closeEnableOverlay(){
@@ -36,11 +36,17 @@ class NYPExtension {
         this.maxPriceInput.val($(e.target).data('max'));
         this.enableButton.attr('data-id', $(e.target).data('id'));
         this.enableButton.attr('data-category', $(e.target).data('category'));
-        this.enableOverlay.removeClass('hidden');
+        this.enableButton.removeClass('hidden');
+        this.noMinError.addClass('hidden');
+        this.lowMinWarning.addClass('hidden');
+        this.negativeMinError.addClass('hidden');
+        this.lowerMaxError.addClass('hidden');
+        this.zeroMaxError.addClass('hidden');
         if (($(e.target).data('category') == 49) || ($(e.target).data('category') == 50) || (this.enableButton.data('category') == 86)){
             this.noMinError.removeClass('hidden');
             this.enableButton.addClass('hidden');
         }
+        this.enableOverlay.removeClass('hidden');
     }
     enableSettings(e){
         //move this into a function that conditionally shows/hides messages and enable button when the value in the min/max inputs is changed
@@ -63,20 +69,53 @@ class NYPExtension {
                 this.noMinError.removeClass('hidden');
                 this.lowMinWarning.addClass('hidden');
                 this.enableButton.addClass('hidden');
+                this.negativeMinError.addClass('hidden');
             } else if (parseInt(this.minPriceInput.val(), 10) < 10){
                 this.noMinError.addClass('hidden');
                 this.lowMinWarning.removeClass('hidden');
                 this.enableButton.removeClass('hidden');
+                this.negativeMinError.addClass('hidden');
             } else {
                 this.noMinError.addClass('hidden');
                 this.lowMinWarning.addClass('hidden');
                 this.enableButton.removeClass('hidden');
+                this.negativeMinError.addClass('hidden');
             }
+        }
+        if ((parseInt(this.minPriceInput.val(), 10) < 0)){
+            this.negativeMinError.removeClass('hidden');
+            this.lowerMaxError.addClass('hidden');
+            this.enableButton.addClass('hidden');
+        } else if (parseInt(this.maxPriceInput.val(), 10) <= parseInt(this.minPriceInput.val(), 10)){
+            this.lowerMaxError.removeClass('hidden');
+            this.negativeMinError.addClass('hidden');
+            this.enableButton.addClass('hidden');
         } else {
-            console.log(this.enableButton.data('category'));
             this.noMinError.addClass('hidden');
             this.lowMinWarning.addClass('hidden');
+            this.negativeMinError.addClass('hidden');
+            this.lowerMaxError.addClass('hidden');
             this.enableButton.removeClass('hidden');
+        }
+    }
+    validateMax(){
+        if (this.maxPriceInput.val() != ''){
+            this.maxPriceInput.val(parseInt(this.maxPriceInput.val()));
+        }
+        if (this.maxPriceInput.val() < 0){
+            this.maxPriceInput.val(0);
+        }
+        if (parseInt(this.maxPriceInput.val(), 10) <= parseInt(this.minPriceInput.val(), 10)){
+            this.lowerMaxError.removeClass('hidden');
+            this.enableButton.addClass('hidden');
+        } else if (parseInt(this.maxPriceInput.val(), 10) < 1){
+            this.zeroMaxError.removeClass('hidden');
+            this.enableButton.addClass('hidden');
+        } else {
+            this.lowerMaxError.addClass('hidden');
+            this.zeroMaxError.addClass('hidden');
+            this.enableButton.removeClass('hidden');
+            console.log('minimum is ' + this.minPriceInput.val() + ' and maximum is ' + this.maxPriceInput.val());
         }
     }
 }
