@@ -23,8 +23,10 @@ function enableNYP($data){
     if (is_user_logged_in() && in_array( 'dc_vendor', (array) $user->roles )){
         $deleteQuery = 'delete from %i
         where post_id = %d
-        and meta_key in (%s, %s)';
-        $wpdb->query($wpdb->prepare($deleteQuery, $postmeta_table, $id, "_woonp_min", "_woonp_max"));
+        and meta_key in (%s, %s, %s)';
+        $wpdb->query($wpdb->prepare($deleteQuery, $postmeta_table, $id, "_woonp_min", "_woonp_max", "_woonp_status"));
+        $statusQuery = 'insert into %i (post_id, meta_key, meta_value) values (%d, "_woonp_status", "overwrite");';
+        $wpdb->query($wpdb->prepare($statusQuery, $postmeta_table, $id));
         $minQuery = 'insert into %i (post_id, meta_key, meta_value) values (%d, "_woonp_min", %s);';
         $wpdb->query($wpdb->prepare($minQuery, $postmeta_table, $id, $min));
         $maxQuery = 'insert into %i (post_id, meta_key, meta_value) values (%d, "_woonp_max", %s);';
