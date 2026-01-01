@@ -49,16 +49,24 @@ class NYPExtension {
         this.enableOverlay.removeClass('hidden');
     }
     enableSettings(e){
-        //move this into a function that conditionally shows/hides messages and enable button when the value in the min/max inputs is changed
-        if (($(e.target).data('category') == 49) || ($(e.target).data('category') == 50) || (this.enableButton.data('category') == 86)){ //paperback: 51 for dev, 84 for prod; hardcover: 50 for dev, 85 for prod
-            if (parseInt(this.minPriceInput.val, 10) < 1){
-                this.noMinError.removeClass('hidden');
-                this.lowMinWarning.addClass('hidden');
-            } else if (parseInt(this.minPriceInput.val, 10) < 10){
-                this.noMinError.addClass('hidden');
-                this.lowMinWarning.removeClass('hidden');
+        $.ajax({
+            beforeSend: (xhr) => {
+                xhr.setRequestHeader('X-WP-Nonce', marketplaceData.nonce);
+            },
+            url: tomcBookorgData.root_url + '/wp-json/tomcMVXtendNYP/v1/enableNYP',
+            type: 'POST',
+            data: {
+                'id' : $(e.target).data('id'),
+                'min' : parseInt(this.minPriceInput.val()),
+                'max' : parseInt(this.maxPriceInput.val())
+            },
+            success: (response) => {
+                console.log(response);
+            },
+            failure: (response) => {
+                console.log(response);
             }
-        }
+        })
     }
     validateMin(){
         if (parseInt(this.minPriceInput.val()) !== parseInt(this.minPriceInput.val())){
