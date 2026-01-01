@@ -557,6 +557,11 @@ class NYPExtension {
     this.negativeMinError = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-mvx-nyp-enable--negative-min-error');
     this.lowerMaxError = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-mvx-nyp-enable--lower-max-error');
     this.zeroMaxError = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-mvx-nyp-enable--zero-max-error');
+    this.disableOverlay = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-mvx-nyp-disable--overlay');
+    this.disableOverlayCloseButton = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-mvx-nyp-disable--overlay svg.search-overlay__close');
+    this.disableOverlayCancel = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-mvx-nyp-disable-cancel-button');
+    this.disableOverlayLink = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-name-price-disable-overlay-link');
+    this.disableButton = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-mvx-nyp-disable-button');
     this.events();
   }
   events() {
@@ -567,9 +572,19 @@ class NYPExtension {
     this.enableButton.on('click', this.enableSettings.bind(this));
     this.minPriceInput.on('change', this.validateMinMax.bind(this));
     this.maxPriceInput.on('change', this.validateMinMax.bind(this));
+    this.disableOverlayCloseButton.on('click', this.closeDisableOverlay.bind(this));
+    this.disableOverlayCancel.on('click', this.closeDisableOverlay.bind(this));
+    this.disableOverlayLink.on('click', this.openDisableOverlay.bind(this));
   }
   closeEnableOverlay() {
     this.enableOverlay.addClass('hidden');
+  }
+  closeDisableOverlay() {
+    this.disableOverlay.addClass('hidden');
+  }
+  openDisableOverlay(e) {
+    this.disableButton.attr('data-id', jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).data('id'));
+    this.disableOverlay.removeClass('hidden');
   }
   openEnableOverlay(e) {
     this.minPriceInput.val(jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).data('min'));

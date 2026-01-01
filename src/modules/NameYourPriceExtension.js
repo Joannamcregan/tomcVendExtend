@@ -15,6 +15,11 @@ class NYPExtension {
         this.negativeMinError = $('#tomc-mvx-nyp-enable--negative-min-error');
         this.lowerMaxError = $('#tomc-mvx-nyp-enable--lower-max-error');
         this.zeroMaxError = $('#tomc-mvx-nyp-enable--zero-max-error');
+        this.disableOverlay = $('#tomc-mvx-nyp-disable--overlay');
+        this.disableOverlayCloseButton = $('#tomc-mvx-nyp-disable--overlay svg.search-overlay__close');
+        this.disableOverlayCancel = $('#tomc-mvx-nyp-disable-cancel-button');
+        this.disableOverlayLink = $('#tomc-name-price-disable-overlay-link');
+        this.disableButton = $('#tomc-mvx-nyp-disable-button');
         this.events();
     }
 
@@ -26,10 +31,20 @@ class NYPExtension {
         this.enableButton.on('click', this.enableSettings.bind(this));
         this.minPriceInput.on('change', this.validateMinMax.bind(this));
         this.maxPriceInput.on('change', this.validateMinMax.bind(this));
+        this.disableOverlayCloseButton.on('click', this.closeDisableOverlay.bind(this));
+        this.disableOverlayCancel.on('click', this.closeDisableOverlay.bind(this));
+        this.disableOverlayLink.on('click', this.openDisableOverlay.bind(this));
     }
 
     closeEnableOverlay(){
         this.enableOverlay.addClass('hidden');
+    }
+    closeDisableOverlay(){
+        this.disableOverlay.addClass('hidden');
+    }
+    openDisableOverlay(e){
+        this.disableButton.attr('data-id', $(e.target).data('id'));
+        this.disableOverlay.removeClass('hidden');
     }
     openEnableOverlay(e){
         this.minPriceInput.val($(e.target).data('min'));
