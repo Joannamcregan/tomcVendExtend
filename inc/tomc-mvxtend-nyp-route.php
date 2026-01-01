@@ -21,12 +21,12 @@ function enableNYP($data){
         where post_id = %d
         and meta_key in (%s, %s)';
         $wpdb->query($wpdb->prepare($deleteQuery, $postmeta_table, $id, "_woonp_min", "_woonp_max"));
-        $minQuery = 'insert into %i (post_id, meta_key, meta_value) values (%d, "_woonp_min", %d);';
+        $minQuery = 'insert into %i (post_id, meta_key, meta_value) values (%d, "_woonp_min", %s);';
         $wpdb->query($wpdb->prepare($minQuery, $postmeta_table, $id, $min));
-        $maxQuery = 'insert into %i (post_id, meta_key, meta_value) values (%d, "_woonp_max", %d);';
+        $maxQuery = 'insert into %i (post_id, meta_key, meta_value) values (%d, "_woonp_max", %s);';
         $wpdb->query($wpdb->prepare($maxQuery, $postmeta_table, $id, $max));
         // return 'success';
-        return $wpdb->prepare($deleteQuery, $postmeta_table, $id, "_woonp_min", "_woonp_max");
+        return $wpdb->prepare($minQuery, $postmeta_table, $id, $min);
     } else {
         return 'fail';
     }

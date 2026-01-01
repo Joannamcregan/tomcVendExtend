@@ -583,12 +583,17 @@ class NYPExtension {
     this.lowerMaxError.addClass('hidden');
     this.zeroMaxError.addClass('hidden');
     if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).data('category') == 49 || jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).data('category') == 50 || this.enableButton.data('category') == 86) {
-      this.noMinError.removeClass('hidden');
-      this.enableButton.addClass('hidden');
+      if (parseInt(this.minPriceInput.val(), 10) < 1 || this.minPriceInput.val() == '') {
+        this.noMinError.removeClass('hidden');
+        this.enableButton.addClass('hidden');
+      } else if (parseInt(this.minPriceInput.val(), 10) < 10) {
+        this.lowMinWarning.removeClass('hidden');
+      }
     }
     this.enableOverlay.removeClass('hidden');
   }
   enableSettings(e) {
+    console.log('max is ' + this.maxPriceInput.val());
     jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
       beforeSend: xhr => {
         xhr.setRequestHeader('X-WP-Nonce', marketplaceData.nonce);
@@ -597,14 +602,14 @@ class NYPExtension {
       type: 'POST',
       data: {
         'id': jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).data('id'),
-        'min': parseInt(this.minPriceInput.val()),
-        'max': parseInt(this.maxPriceInput.val())
+        'min': this.minPriceInput.val(),
+        'max': this.maxPriceInput.val()
       },
       success: response => {
-        console.log(response);
+        location.reload(true);
       },
       failure: response => {
-        console.log(response);
+        //console.log(response);
       }
     });
   }
