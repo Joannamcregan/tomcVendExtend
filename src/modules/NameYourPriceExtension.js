@@ -34,6 +34,7 @@ class NYPExtension {
         this.disableOverlayCloseButton.on('click', this.closeDisableOverlay.bind(this));
         this.disableOverlayCancel.on('click', this.closeDisableOverlay.bind(this));
         this.disableOverlayLink.on('click', this.openDisableOverlay.bind(this));
+        this.disableButton.on('click', this.disableSettings.bind(this));
     }
 
     closeEnableOverlay(){
@@ -67,8 +68,25 @@ class NYPExtension {
         }
         this.enableOverlay.removeClass('hidden');
     }
+    disableSettings(e){
+        $.ajax({
+            beforeSend: (xhr) => {
+                xhr.setRequestHeader('X-WP-Nonce', marketplaceData.nonce);
+            },
+            url: tomcBookorgData.root_url + '/wp-json/tomcMVXtendNYP/v1/disableNYP',
+            type: 'POST',
+            data: {
+                'id' : $(e.target).data('id')
+            },
+            success: (response) => {
+                location.reload(true);
+            },
+            failure: (response) => {
+                //console.log(response);
+            }
+        })
+    }
     enableSettings(e){
-        console.log('max is ' + this.maxPriceInput.val());
         $.ajax({
             beforeSend: (xhr) => {
                 xhr.setRequestHeader('X-WP-Nonce', marketplaceData.nonce);
