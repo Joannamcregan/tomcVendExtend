@@ -565,8 +565,8 @@ class NYPExtension {
     this.enableOverlayLink.on('click', this.openEnableOverlay.bind(this));
     this.manageOverlayLink.on('click', this.openEnableOverlay.bind(this));
     this.enableButton.on('click', this.enableSettings.bind(this));
-    this.minPriceInput.on('change', this.validateMin.bind(this));
-    this.maxPriceInput.on('change', this.validateMax.bind(this));
+    this.minPriceInput.on('change', this.validateMinMax.bind(this));
+    this.maxPriceInput.on('change', this.validateMinMax.bind(this));
   }
   closeEnableOverlay() {
     this.enableOverlay.addClass('hidden');
@@ -602,52 +602,57 @@ class NYPExtension {
     }
   }
   validateMin() {
-    if (this.minPriceInput.val() != '') {
+    if (parseInt(this.minPriceInput.val()) !== parseInt(this.minPriceInput.val())) {
+      this.minPriceInput.val('');
+    } else if (this.minPriceInput.val() != '') {
       this.minPriceInput.val(parseInt(this.minPriceInput.val()));
-    }
-    if (this.enableButton.data('category') == 49 || this.enableButton.data('category') == 50 || this.enableButton.data('category') == 86) {
-      //paperbacks, hardcovers, physical zines
-      if (parseInt(this.minPriceInput.val(), 10) < 1 || this.minPriceInput.val() == '') {
-        this.noMinError.removeClass('hidden');
-        this.lowMinWarning.addClass('hidden');
-        this.enableButton.addClass('hidden');
-        this.negativeMinError.addClass('hidden');
-      } else if (parseInt(this.minPriceInput.val(), 10) < 10) {
-        this.noMinError.addClass('hidden');
-        this.lowMinWarning.removeClass('hidden');
-        this.enableButton.removeClass('hidden');
-        this.negativeMinError.addClass('hidden');
-      } else {
-        this.noMinError.addClass('hidden');
-        this.lowMinWarning.addClass('hidden');
-        this.enableButton.removeClass('hidden');
-        this.negativeMinError.addClass('hidden');
-      }
     }
     if (parseInt(this.minPriceInput.val(), 10) < 0) {
       this.negativeMinError.removeClass('hidden');
       this.lowerMaxError.addClass('hidden');
       this.enableButton.addClass('hidden');
-    } else if (parseInt(this.maxPriceInput.val(), 10) <= parseInt(this.minPriceInput.val(), 10)) {
+    } else if (parseInt(this.maxPriceInput.val(), 10) <= parseInt(this.minPriceInput.val(), 10) || this.minPriceInput.val() == '' && this.maxPriceInput.val() !== '') {
       this.lowerMaxError.removeClass('hidden');
       this.negativeMinError.addClass('hidden');
       this.enableButton.addClass('hidden');
     } else {
-      this.noMinError.addClass('hidden');
-      this.lowMinWarning.addClass('hidden');
-      this.negativeMinError.addClass('hidden');
-      this.lowerMaxError.addClass('hidden');
-      this.enableButton.removeClass('hidden');
+      if (this.enableButton.data('category') == 49 || this.enableButton.data('category') == 50 || this.enableButton.data('category') == 86) {
+        //paperbacks, hardcovers, physical zines
+        if (parseInt(this.minPriceInput.val(), 10) < 1 || this.minPriceInput.val() == '') {
+          this.noMinError.removeClass('hidden');
+          this.lowMinWarning.addClass('hidden');
+          this.enableButton.addClass('hidden');
+          this.negativeMinError.addClass('hidden');
+        } else if (parseInt(this.minPriceInput.val(), 10) < 10) {
+          this.noMinError.addClass('hidden');
+          this.lowMinWarning.removeClass('hidden');
+          this.enableButton.removeClass('hidden');
+          this.negativeMinError.addClass('hidden');
+        } else {
+          this.noMinError.addClass('hidden');
+          this.lowMinWarning.addClass('hidden');
+          this.enableButton.removeClass('hidden');
+          this.negativeMinError.addClass('hidden');
+        }
+      } else {
+        this.noMinError.addClass('hidden');
+        this.lowMinWarning.addClass('hidden');
+        this.negativeMinError.addClass('hidden');
+        this.lowerMaxError.addClass('hidden');
+        this.enableButton.removeClass('hidden');
+      }
     }
   }
   validateMax() {
-    if (this.maxPriceInput.val() != '') {
+    if (parseInt(this.maxPriceInput.val()) !== parseInt(this.maxPriceInput.val())) {
+      this.maxPriceInput.val('');
+    } else if (this.maxPriceInput.val() != '') {
       this.maxPriceInput.val(parseInt(this.maxPriceInput.val()));
     }
     if (this.maxPriceInput.val() < 0) {
       this.maxPriceInput.val(0);
     }
-    if (parseInt(this.maxPriceInput.val(), 10) <= parseInt(this.minPriceInput.val(), 10)) {
+    if (parseInt(this.maxPriceInput.val(), 10) <= parseInt(this.minPriceInput.val(), 10) || this.minPriceInput.val() == '' && this.maxPriceInput.val() !== '') {
       this.lowerMaxError.removeClass('hidden');
       this.enableButton.addClass('hidden');
     } else if (parseInt(this.maxPriceInput.val(), 10) < 1) {
@@ -656,8 +661,65 @@ class NYPExtension {
     } else {
       this.lowerMaxError.addClass('hidden');
       this.zeroMaxError.addClass('hidden');
+      if (this.enableButton.data('category') == 49 || this.enableButton.data('category') == 50 || this.enableButton.data('category') == 86) {
+        //paperbacks, hardcovers, physical zines
+        if (this.minPriceInput.val() != '' && this.minPriceInput.val() > 0) {
+          this.enableButton.removeClass('hidden');
+        }
+      }
+    }
+  }
+  validateMinMax() {
+    let allowEnable = true;
+    if (parseInt(this.minPriceInput.val()) !== parseInt(this.minPriceInput.val())) {
+      this.minPriceInput.val('');
+    } else if (this.minPriceInput.val() != '') {
+      this.minPriceInput.val(parseInt(this.minPriceInput.val()));
+    }
+    if (parseInt(this.maxPriceInput.val()) !== parseInt(this.maxPriceInput.val())) {
+      this.maxPriceInput.val('');
+    } else if (this.maxPriceInput.val() != '') {
+      this.maxPriceInput.val(parseInt(this.maxPriceInput.val()));
+    }
+    if (this.maxPriceInput.val() < 0) {
+      this.maxPriceInput.val(0);
+    }
+    if (parseInt(this.minPriceInput.val(), 10) < 0) {
+      this.negativeMinError.removeClass('hidden');
+      allowEnable = false;
+    } else {
+      this.negativeMinError.addClass('hidden');
+    }
+    if (parseInt(this.maxPriceInput.val(), 10) <= parseInt(this.minPriceInput.val(), 10) || this.minPriceInput.val() == '' && this.maxPriceInput.val() !== '') {
+      this.lowerMaxError.removeClass('hidden');
+      allowEnable = false;
+    } else {
+      this.lowerMaxError.addClass('hidden');
+    }
+    if (parseInt(this.maxPriceInput.val(), 10) < 1) {
+      this.zeroMaxError.removeClass('hidden');
+      allowEnable = false;
+    } else {
+      this.zeroMaxError.addClass('hidden');
+    }
+    if (this.enableButton.data('category') == 49 || this.enableButton.data('category') == 50 || this.enableButton.data('category') == 86) {
+      //paperbacks, hardcovers, physical zines
+      if (parseInt(this.minPriceInput.val(), 10) < 1 || this.minPriceInput.val() == '') {
+        this.noMinError.removeClass('hidden');
+        this.lowMinWarning.addClass('hidden');
+        allowEnable = false;
+      } else if (parseInt(this.minPriceInput.val(), 10) < 10) {
+        this.noMinError.addClass('hidden');
+        this.lowMinWarning.removeClass('hidden');
+      } else {
+        this.noMinError.addClass('hidden');
+        this.lowMinWarning.addClass('hidden');
+      }
+    }
+    if (allowEnable) {
       this.enableButton.removeClass('hidden');
-      console.log('minimum is ' + this.minPriceInput.val() + ' and maximum is ' + this.maxPriceInput.val());
+    } else {
+      this.enableButton.addClass('hidden');
     }
   }
 }
