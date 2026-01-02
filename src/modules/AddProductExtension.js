@@ -13,13 +13,13 @@ class AddProductExtension {
         this.productTitleSection = $('.product-title-wrap');
         this.virtualCheckbox = $('input#_virtual');
         this.downloadableCheckbox = $('input#_downloadable');
-        this.serviceCatCheckbox = $('ul.product_cat input[value=53]'); //58 for dev, 53 for prod
-        this.paperbackCatCheckbox = $('ul.product_cat input[value=84]'); //51 for dev, 84 for prod
-        this.hardcoverCatCheckbox = $('ul.product_cat input[value=85]'); //50 for dev, 85 for prod
-        this.ebookCatCheckbox = $('ul.product_cat input[value=49]'); //48 for dev, 49 for prod
-        this.audiobookCatCheckbox = $('ul.product_cat input[value=50]'); //49 for dev, 50 for prod
-        this.physicalZineCheckbox = $('ul.product_cat input[value=86]'); //55 for dev, 86 for prod
-        this.digitalZineCheckbox = $('ul.product_cat input[value=75]'); //56 for dev, 75 for prod
+        this.serviceCatCheckbox = $('ul.product_cat input[value=58]'); //58 for dev, 53 for prod
+        this.paperbackCatCheckbox = $('ul.product_cat input[value=51]'); //51 for dev, 84 for prod
+        this.hardcoverCatCheckbox = $('ul.product_cat input[value=50]'); //50 for dev, 85 for prod
+        this.ebookCatCheckbox = $('ul.product_cat input[value=48]'); //48 for dev, 49 for prod
+        this.audiobookCatCheckbox = $('ul.product_cat input[value=49]'); //49 for dev, 50 for prod
+        this.physicalZineCheckbox = $('ul.product_cat input[value=55]'); //55 for dev, 86 for prod
+        this.digitalZineCheckbox = $('ul.product_cat input[value=56]'); //56 for dev, 75 for prod
         this.uncategorizedCatCheckbox = $('ul.product_cat input[value=16]'); //16 for dev, somehow also 16 for prod
         this.catCheckboxes = $('ul.product_cat input[type=checkbox]');
         this.taxStatusDropdown = $('#_tax_status');

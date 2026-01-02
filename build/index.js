@@ -28,13 +28,13 @@ class AddProductExtension {
     this.productTitleSection = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.product-title-wrap');
     this.virtualCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input#_virtual');
     this.downloadableCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input#_downloadable');
-    this.serviceCatCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=53]'); //58 for dev, 53 for prod
-    this.paperbackCatCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=84]'); //51 for dev, 84 for prod
-    this.hardcoverCatCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=85]'); //50 for dev, 85 for prod
-    this.ebookCatCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=49]'); //48 for dev, 49 for prod
-    this.audiobookCatCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=50]'); //49 for dev, 50 for prod
-    this.physicalZineCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=86]'); //55 for dev, 86 for prod
-    this.digitalZineCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=75]'); //56 for dev, 75 for prod
+    this.serviceCatCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=58]'); //58 for dev, 53 for prod
+    this.paperbackCatCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=51]'); //51 for dev, 84 for prod
+    this.hardcoverCatCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=50]'); //50 for dev, 85 for prod
+    this.ebookCatCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=48]'); //48 for dev, 49 for prod
+    this.audiobookCatCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=49]'); //49 for dev, 50 for prod
+    this.physicalZineCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=55]'); //55 for dev, 86 for prod
+    this.digitalZineCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=56]'); //56 for dev, 75 for prod
     this.uncategorizedCatCheckbox = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[value=16]'); //16 for dev, somehow also 16 for prod
     this.catCheckboxes = jquery__WEBPACK_IMPORTED_MODULE_0___default()('ul.product_cat input[type=checkbox]');
     this.taxStatusDropdown = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#_tax_status');
@@ -552,7 +552,6 @@ class NYPExtension {
     this.minPriceInput = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-mvx-nyp-min-price');
     this.maxPriceInput = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-mvx-nyp-max-price');
     this.enableButton = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-mvx-nyp-enable-button');
-    this.noMinError = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-mvx-nyp-enable--no-min-error');
     this.lowMinWarning = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-mvx-nyp-enable--low-min-warning');
     this.negativeMinError = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-mvx-nyp-enable--negative-min-error');
     this.lowerMaxError = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tomc-mvx-nyp-enable--lower-max-error');
@@ -593,16 +592,12 @@ class NYPExtension {
     this.enableButton.attr('data-id', jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).data('id'));
     this.enableButton.attr('data-category', jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).data('category'));
     this.enableButton.removeClass('hidden');
-    this.noMinError.addClass('hidden');
     this.lowMinWarning.addClass('hidden');
     this.negativeMinError.addClass('hidden');
     this.lowerMaxError.addClass('hidden');
     this.zeroMaxError.addClass('hidden');
-    if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).data('category') == 49 || jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).data('category') == 50 || this.enableButton.data('category') == 86) {
-      if (parseInt(this.minPriceInput.val(), 10) < 1 || this.minPriceInput.val() == '') {
-        this.noMinError.removeClass('hidden');
-        this.enableButton.addClass('hidden');
-      } else if (parseInt(this.minPriceInput.val(), 10) < 10) {
+    if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).data('category') == 55 || jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).data('category') == 50 || this.enableButton.data('category') == 86) {
+      if (parseInt(this.minPriceInput.val(), 10) < 10) {
         this.lowMinWarning.removeClass('hidden');
       }
     }
@@ -646,74 +641,6 @@ class NYPExtension {
       }
     });
   }
-  validateMin() {
-    if (parseInt(this.minPriceInput.val()) !== parseInt(this.minPriceInput.val())) {
-      this.minPriceInput.val('');
-    } else if (this.minPriceInput.val() != '') {
-      this.minPriceInput.val(parseInt(this.minPriceInput.val()));
-    }
-    if (parseInt(this.minPriceInput.val(), 10) < 0) {
-      this.negativeMinError.removeClass('hidden');
-      this.lowerMaxError.addClass('hidden');
-      this.enableButton.addClass('hidden');
-    } else if (parseInt(this.maxPriceInput.val(), 10) <= parseInt(this.minPriceInput.val(), 10) || this.minPriceInput.val() == '' && this.maxPriceInput.val() !== '') {
-      this.lowerMaxError.removeClass('hidden');
-      this.negativeMinError.addClass('hidden');
-      this.enableButton.addClass('hidden');
-    } else {
-      if (this.enableButton.data('category') == 49 || this.enableButton.data('category') == 50 || this.enableButton.data('category') == 86) {
-        //paperbacks, hardcovers, physical zines
-        if (parseInt(this.minPriceInput.val(), 10) < 1 || this.minPriceInput.val() == '') {
-          this.noMinError.removeClass('hidden');
-          this.lowMinWarning.addClass('hidden');
-          this.enableButton.addClass('hidden');
-          this.negativeMinError.addClass('hidden');
-        } else if (parseInt(this.minPriceInput.val(), 10) < 10) {
-          this.noMinError.addClass('hidden');
-          this.lowMinWarning.removeClass('hidden');
-          this.enableButton.removeClass('hidden');
-          this.negativeMinError.addClass('hidden');
-        } else {
-          this.noMinError.addClass('hidden');
-          this.lowMinWarning.addClass('hidden');
-          this.enableButton.removeClass('hidden');
-          this.negativeMinError.addClass('hidden');
-        }
-      } else {
-        this.noMinError.addClass('hidden');
-        this.lowMinWarning.addClass('hidden');
-        this.negativeMinError.addClass('hidden');
-        this.lowerMaxError.addClass('hidden');
-        this.enableButton.removeClass('hidden');
-      }
-    }
-  }
-  validateMax() {
-    if (parseInt(this.maxPriceInput.val()) !== parseInt(this.maxPriceInput.val())) {
-      this.maxPriceInput.val('');
-    } else if (this.maxPriceInput.val() != '') {
-      this.maxPriceInput.val(parseInt(this.maxPriceInput.val()));
-    }
-    if (this.maxPriceInput.val() < 0) {
-      this.maxPriceInput.val(0);
-    }
-    if (parseInt(this.maxPriceInput.val(), 10) <= parseInt(this.minPriceInput.val(), 10) || this.minPriceInput.val() == '' && this.maxPriceInput.val() !== '') {
-      this.lowerMaxError.removeClass('hidden');
-      this.enableButton.addClass('hidden');
-    } else if (parseInt(this.maxPriceInput.val(), 10) < 1) {
-      this.zeroMaxError.removeClass('hidden');
-      this.enableButton.addClass('hidden');
-    } else {
-      this.lowerMaxError.addClass('hidden');
-      this.zeroMaxError.addClass('hidden');
-      if (this.enableButton.data('category') == 49 || this.enableButton.data('category') == 50 || this.enableButton.data('category') == 86) {
-        //paperbacks, hardcovers, physical zines
-        if (this.minPriceInput.val() != '' && this.minPriceInput.val() > 0) {
-          this.enableButton.removeClass('hidden');
-        }
-      }
-    }
-  }
   validateMinMax() {
     let allowEnable = true;
     if (parseInt(this.minPriceInput.val()) !== parseInt(this.minPriceInput.val())) {
@@ -747,17 +674,11 @@ class NYPExtension {
     } else {
       this.zeroMaxError.addClass('hidden');
     }
-    if (this.enableButton.data('category') == 49 || this.enableButton.data('category') == 50 || this.enableButton.data('category') == 86) {
+    if (this.enableButton.data('category') == 55 || this.enableButton.data('category') == 50 || this.enableButton.data('category') == 86) {
       //paperbacks, hardcovers, physical zines
-      if (parseInt(this.minPriceInput.val(), 10) < 1 || this.minPriceInput.val() == '') {
-        this.noMinError.removeClass('hidden');
-        this.lowMinWarning.addClass('hidden');
-        allowEnable = false;
-      } else if (parseInt(this.minPriceInput.val(), 10) < 10) {
-        this.noMinError.addClass('hidden');
+      if (parseInt(this.minPriceInput.val(), 10) < 10 || this.minPriceInput.val() == '') {
         this.lowMinWarning.removeClass('hidden');
       } else {
-        this.noMinError.addClass('hidden');
         this.lowMinWarning.addClass('hidden');
       }
     }
