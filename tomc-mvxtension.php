@@ -12,13 +12,12 @@ require_once plugin_dir_path(__FILE__) . 'inc/tomc-mvxtend-nyp-route.php';
 
 class TomcMvxtension {
     function __construct() {
-        add_action('activate_tomc-mvxtension/tomc-mvxtension.php', array($this, 'onActivate'));
-        //add_action('init', array($this, 'onActivate'));
-        add_action('wp_enqueue_scripts', array($this, 'pluginFiles'));
-
         wp_localize_script('tomc-mvxtension-js', 'tomcMvxtensionData', array(
             'root_url' => get_site_url()
         ));
+        add_action('activate_tomc-mvxtension/tomc-mvxtension.php', array($this, 'onActivate'));
+        //add_action('init', array($this, 'onActivate'));
+        add_action('wp_enqueue_scripts', array($this, 'pluginFiles'));
     }	
 
     function pluginFiles(){
