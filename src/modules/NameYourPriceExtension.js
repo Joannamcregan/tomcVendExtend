@@ -56,7 +56,7 @@ class NYPExtension {
         this.negativeMinError.addClass('hidden');
         this.lowerMaxError.addClass('hidden');
         this.zeroMaxError.addClass('hidden');
-        if (($(e.target).data('category') == 55) || ($(e.target).data('category') == 50) || (this.enableButton.data('category') == 86)){
+        if (($(e.target).data('category') == 84) || ($(e.target).data('category') == 85) || (this.enableButton.data('category') == 86)){
             if (parseInt(this.minPriceInput.val(), 10) < 10){
                 this.lowMinWarning.removeClass('hidden');
             }
@@ -134,7 +134,7 @@ class NYPExtension {
         } else {
             this.zeroMaxError.addClass('hidden');
         }
-        if ((this.enableButton.data('category') == 55) || (this.enableButton.data('category') == 50) || (this.enableButton.data('category') == 86)){ //paperbacks, hardcovers, physical zines
+        if ((this.enableButton.data('category') == 84) || (this.enableButton.data('category') == 85) || (this.enableButton.data('category') == 86)){ //paperbacks, hardcovers, physical zines
             if ((parseInt(this.minPriceInput.val(), 10) < 10) || (this.minPriceInput.val() == '')){
                 this.lowMinWarning.removeClass('hidden');
             } else {
