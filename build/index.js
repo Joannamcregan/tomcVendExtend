@@ -622,27 +622,24 @@ class NYPExtension {
     });
   }
   enableSettings(e) {
-    if (true) {
-      console.log('if statement');
-      jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
-        beforeSend: xhr => {
-          xhr.setRequestHeader('X-WP-Nonce', marketplaceData.nonce);
-        },
-        url: tomcBookorgData.root_url + '/wp-json/tomcMVXtendNYP/v1/enableNYP',
-        type: 'POST',
-        data: {
-          'id': jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).data('id'),
-          'min': this.minPriceInput.val(),
-          'max': this.maxPriceInput.val()
-        },
-        success: response => {
-          location.reload(true);
-        },
-        failure: response => {
-          //console.log(response);
-        }
-      });
-    }
+    jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
+      beforeSend: xhr => {
+        xhr.setRequestHeader('X-WP-Nonce', marketplaceData.nonce);
+      },
+      url: tomcBookorgData.root_url + '/wp-json/tomcMVXtendNYP/v1/enableNYP',
+      type: 'POST',
+      data: {
+        'id': jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).data('id'),
+        'min': this.minPriceInput.val(),
+        'max': this.maxPriceInput.val()
+      },
+      success: response => {
+        location.reload(true);
+      },
+      failure: response => {
+        //console.log(response);
+      }
+    });
   }
   validateMinMax() {
     let allowEnable = true;
@@ -665,7 +662,7 @@ class NYPExtension {
     } else {
       this.negativeMinError.addClass('hidden');
     }
-    if (parseInt(this.maxPriceInput.val(), 10) <= parseInt(this.minPriceInput.val(), 10) || this.minPriceInput.val() == '' && this.maxPriceInput.val() !== '') {
+    if (parseInt(this.maxPriceInput.val(), 10) <= parseInt(this.minPriceInput.val(), 10)) {
       this.lowerMaxError.removeClass('hidden');
       allowEnable = false;
     } else {

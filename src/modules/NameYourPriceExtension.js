@@ -82,27 +82,24 @@ class NYPExtension {
         })
     }
     enableSettings(e){
-        if (1+1==2){
-            console.log('if statement');
-            $.ajax({
-                beforeSend: (xhr) => {
-                    xhr.setRequestHeader('X-WP-Nonce', marketplaceData.nonce);
-                },
-                url: tomcBookorgData.root_url + '/wp-json/tomcMVXtendNYP/v1/enableNYP',
-                type: 'POST',
-                data: {
-                    'id' : $(e.target).data('id'),
-                    'min' : this.minPriceInput.val(),
-                    'max' : this.maxPriceInput.val()
-                },
-                success: (response) => {
-                    location.reload(true);
-                },
-                failure: (response) => {
-                    //console.log(response);
-                }
-            })
-        }
+        $.ajax({
+            beforeSend: (xhr) => {
+                xhr.setRequestHeader('X-WP-Nonce', marketplaceData.nonce);
+            },
+            url: tomcBookorgData.root_url + '/wp-json/tomcMVXtendNYP/v1/enableNYP',
+            type: 'POST',
+            data: {
+                'id' : $(e.target).data('id'),
+                'min' : this.minPriceInput.val(),
+                'max' : this.maxPriceInput.val()
+            },
+            success: (response) => {
+                location.reload(true);
+            },
+            failure: (response) => {
+                //console.log(response);
+            }
+        })
     }
     validateMinMax(){
         let allowEnable = true;
@@ -125,7 +122,7 @@ class NYPExtension {
         } else {
             this.negativeMinError.addClass('hidden');
         }
-        if ((parseInt(this.maxPriceInput.val(), 10) <= parseInt(this.minPriceInput.val(), 10)) || (this.minPriceInput.val() == '' && this.maxPriceInput.val() !== '')){
+        if ((parseInt(this.maxPriceInput.val(), 10) <= parseInt(this.minPriceInput.val(), 10))){
             this.lowerMaxError.removeClass('hidden');
             allowEnable = false;
         } else {
