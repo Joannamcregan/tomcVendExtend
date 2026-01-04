@@ -47,21 +47,23 @@ class NYPExtension {
         this.disableOverlay.removeClass('hidden');
     }
     openEnableOverlay(e){
-        this.minPriceInput.val($(e.target).data('min'));
-        this.maxPriceInput.val($(e.target).data('max'));
-        this.enableButton.attr('data-id', $(e.target).data('id'));
-        this.enableButton.attr('data-category', $(e.target).data('category'));
-        this.enableButton.removeClass('hidden');
-        this.lowMinWarning.addClass('hidden');
-        this.negativeMinError.addClass('hidden');
-        this.lowerMaxError.addClass('hidden');
-        this.zeroMaxError.addClass('hidden');
-        if (($(e.target).data('category') == 84) || ($(e.target).data('category') == 85) || (this.enableButton.data('category') == 86)){
-            if (parseInt(this.minPriceInput.val(), 10) < 10){
-                this.lowMinWarning.removeClass('hidden');
+        setTimeout((e)=>{
+            this.minPriceInput.val($(e.target).data('min'));
+            this.maxPriceInput.val($(e.target).data('max'));
+            this.enableButton.attr('data-id', $(e.target).data('id'));
+            this.enableButton.attr('data-category', $(e.target).data('category'));
+            this.enableButton.removeClass('hidden');
+            this.lowMinWarning.addClass('hidden');
+            this.negativeMinError.addClass('hidden');
+            this.lowerMaxError.addClass('hidden');
+            this.zeroMaxError.addClass('hidden');
+            if (($(e.target).data('category') == 84) || ($(e.target).data('category') == 85) || (this.enableButton.data('category') == 86)){
+                if (parseInt(this.minPriceInput.val(), 10) < 10){
+                    this.lowMinWarning.removeClass('hidden');
+                }
             }
-        }
-        this.enableOverlay.removeClass('hidden');
+            this.enableOverlay.removeClass('hidden');
+        }, 1000);
     }
     disableSettings(e){
         $.ajax({
