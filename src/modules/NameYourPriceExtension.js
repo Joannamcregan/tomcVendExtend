@@ -47,23 +47,21 @@ class NYPExtension {
         this.disableOverlay.removeClass('hidden');
     }
     openEnableOverlay(e){
-        setTimeout((e)=>{
-            this.minPriceInput.val($(e.target).data('min'));
-            this.maxPriceInput.val($(e.target).data('max'));
-            this.enableButton.attr('data-id', $(e.target).data('id'));
-            this.enableButton.attr('data-category', $(e.target).data('category'));
-            this.enableButton.removeClass('hidden');
-            this.lowMinWarning.addClass('hidden');
-            this.negativeMinError.addClass('hidden');
-            this.lowerMaxError.addClass('hidden');
-            this.zeroMaxError.addClass('hidden');
-            if (($(e.target).data('category') == 84) || ($(e.target).data('category') == 85) || (this.enableButton.data('category') == 86)){
-                if (parseInt(this.minPriceInput.val(), 10) < 10){
-                    this.lowMinWarning.removeClass('hidden');
-                }
+        this.minPriceInput.val($(e.target).data('min'));
+        this.maxPriceInput.val($(e.target).data('max'));
+        this.enableButton.attr('data-id', $(e.target).data('id'));
+        this.enableButton.attr('data-category', $(e.target).data('category'));
+        this.enableButton.removeClass('hidden');
+        this.lowMinWarning.addClass('hidden');
+        this.negativeMinError.addClass('hidden');
+        this.lowerMaxError.addClass('hidden');
+        this.zeroMaxError.addClass('hidden');
+        if (($(e.target).data('category') == 84) || ($(e.target).data('category') == 85) || (this.enableButton.data('category') == 86)){
+            if (parseInt(this.minPriceInput.val(), 10) < 10){
+                this.lowMinWarning.removeClass('hidden');
             }
-            this.enableOverlay.removeClass('hidden');
-        }, 1000);
+        }
+        this.enableOverlay.removeClass('hidden');
     }
     disableSettings(e){
         $.ajax({
@@ -84,24 +82,27 @@ class NYPExtension {
         })
     }
     enableSettings(e){
-        $.ajax({
-            beforeSend: (xhr) => {
-                xhr.setRequestHeader('X-WP-Nonce', marketplaceData.nonce);
-            },
-            url: tomcMvxtensionData.root_url + '/wp-json/tomcMVXtendNYP/v1/enableNYP',
-            type: 'POST',
-            data: {
-                'id' : $(e.target).data('id'),
-                'min' : this.minPriceInput.val(),
-                'max' : this.maxPriceInput.val()
-            },
-            success: (response) => {
-                location.reload(true);
-            },
-            failure: (response) => {
-                //console.log(response);
-            }
-        })
+        let productId = $(e.target).data('id');
+        setTimeout(()=>{
+            $.ajax({
+                beforeSend: (xhr) => {
+                    xhr.setRequestHeader('X-WP-Nonce', marketplaceData.nonce);
+                },
+                url: tomcMvxtensionData.root_url + '/wp-json/tomcMVXtendNYP/v1/enableNYP',
+                type: 'POST',
+                data: {
+                    'id' : productId,
+                    'min' : this.minPriceInput.val(),
+                    'max' : this.maxPriceInput.val()
+                },
+                success: (response) => {
+                    location.reload(true);
+                },
+                failure: (response) => {
+                    //console.log(response);
+                }
+            })
+        }, 1000);
     }
     validateMinMax(){
         let allowEnable = true;

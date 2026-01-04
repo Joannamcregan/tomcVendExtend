@@ -497,7 +497,7 @@ class AddProductExtension {
         beforeSend: xhr => {
           xhr.setRequestHeader('X-WP-Nonce', marketplaceData.nonce);
         },
-        url: tomcBookorgData.root_url + '/wp-json/tomcMVXtend/v1/checkIfAssigned',
+        url: tomcMvxtensionData.root_url + '/wp-json/tomcMVXtend/v1/checkIfAssigned',
         type: 'GET',
         data: {
           'ISBNEntered': Number(isbnEntered)
@@ -608,7 +608,7 @@ class NYPExtension {
       beforeSend: xhr => {
         xhr.setRequestHeader('X-WP-Nonce', marketplaceData.nonce);
       },
-      url: tomcBookorgData.root_url + '/wp-json/tomcMVXtendNYP/v1/disableNYP',
+      url: tomcMvxtensionData.root_url + '/wp-json/tomcMVXtendNYP/v1/disableNYP',
       type: 'POST',
       data: {
         'id': jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).data('id')
@@ -622,24 +622,27 @@ class NYPExtension {
     });
   }
   enableSettings(e) {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
-      beforeSend: xhr => {
-        xhr.setRequestHeader('X-WP-Nonce', marketplaceData.nonce);
-      },
-      url: tomcBookorgData.root_url + '/wp-json/tomcMVXtendNYP/v1/enableNYP',
-      type: 'POST',
-      data: {
-        'id': jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).data('id'),
-        'min': this.minPriceInput.val(),
-        'max': this.maxPriceInput.val()
-      },
-      success: response => {
-        location.reload(true);
-      },
-      failure: response => {
-        //console.log(response);
-      }
-    });
+    let productId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).data('id');
+    setTimeout(() => {
+      jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
+        beforeSend: xhr => {
+          xhr.setRequestHeader('X-WP-Nonce', marketplaceData.nonce);
+        },
+        url: tomcMvxtensionData.root_url + '/wp-json/tomcMVXtendNYP/v1/enableNYP',
+        type: 'POST',
+        data: {
+          'id': productId,
+          'min': this.minPriceInput.val(),
+          'max': this.maxPriceInput.val()
+        },
+        success: response => {
+          location.reload(true);
+        },
+        failure: response => {
+          //console.log(response);
+        }
+      });
+    }, 1000);
   }
   validateMinMax() {
     let allowEnable = true;
