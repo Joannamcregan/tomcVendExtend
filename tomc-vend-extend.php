@@ -1,6 +1,6 @@
 <?php
 /* 
-    Plugin Name: TOMC MVXtension
+    Plugin Name: TOMC Vend Extend
     Version: 1.0
     Author: Joanna
     Description: Extends MVX functionality
@@ -15,8 +15,8 @@ class TomcMvxtension {
         wp_localize_script('tomc-mvxtension-js', 'tomcMvxtensionData', array(
             'root_url' => get_site_url()
         ));
-        // add_action('activate_tomcVendExtend/tomc-mvxtension.php', array($this, 'onActivate'));
-        add_action('init', array($this, 'onActivate'));
+        add_action('activate_tomc-vend-extend/tomc-vend-extend.php', array($this, 'onActivate'));
+        //add_action('init', array($this, 'onActivate'));
         add_action('wp_enqueue_scripts', array($this, 'pluginFiles'));
     }	
 
@@ -31,5 +31,6 @@ class TomcMvxtension {
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
     }
 }
+
 
 $tomcMvxtension = new TomcMvxtension();
