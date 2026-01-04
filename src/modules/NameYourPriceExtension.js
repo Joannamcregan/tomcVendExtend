@@ -47,6 +47,7 @@ class NYPExtension {
         this.disableOverlay.removeClass('hidden');
     }
     openEnableOverlay(e){
+        console.log('opening');
         this.minPriceInput.val($(e.target).data('min'));
         this.maxPriceInput.val($(e.target).data('max'));
         this.enableButton.attr('data-id', $(e.target).data('id'));

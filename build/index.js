@@ -587,6 +587,7 @@ class NYPExtension {
     this.disableOverlay.removeClass('hidden');
   }
   openEnableOverlay(e) {
+    console.log('opening');
     this.minPriceInput.val(jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).data('min'));
     this.maxPriceInput.val(jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).data('max'));
     this.enableButton.attr('data-id', jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).data('id'));
