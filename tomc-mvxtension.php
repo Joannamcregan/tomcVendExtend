@@ -15,6 +15,10 @@ class TomcMvxtension {
         add_action('activate_tomc-mvxtension/tomc-mvxtension.php', array($this, 'onActivate'));
         //add_action('init', array($this, 'onActivate'));
         add_action('wp_enqueue_scripts', array($this, 'pluginFiles'));
+
+        wp_localize_script('tomc-mvxtension-js', 'tomcMvxtensionData', array(
+            'root_url' => get_site_url()
+        ));
     }	
 
     function pluginFiles(){
