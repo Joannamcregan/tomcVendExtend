@@ -68,7 +68,7 @@ class NYPExtension {
             beforeSend: (xhr) => {
                 xhr.setRequestHeader('X-WP-Nonce', marketplaceData.nonce);
             },
-            url: tomcBookorgData.root_url + '/wp-json/tomcMVXtendNYP/v1/disableNYP',
+            url: tomcMvxtensionData.root_url + '/wp-json/tomcMVXtendNYP/v1/disableNYP',
             type: 'POST',
             data: {
                 'id' : $(e.target).data('id')
@@ -86,7 +86,7 @@ class NYPExtension {
             beforeSend: (xhr) => {
                 xhr.setRequestHeader('X-WP-Nonce', marketplaceData.nonce);
             },
-            url: tomcBookorgData.root_url + '/wp-json/tomcMVXtendNYP/v1/enableNYP',
+            url: tomcMvxtensionData.root_url + '/wp-json/tomcMVXtendNYP/v1/enableNYP',
             type: 'POST',
             data: {
                 'id' : $(e.target).data('id'),

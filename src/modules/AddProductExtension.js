@@ -502,7 +502,7 @@ class AddProductExtension {
                 beforeSend: (xhr) => {
                     xhr.setRequestHeader('X-WP-Nonce', marketplaceData.nonce);
                 },
-                url: tomcBookorgData.root_url + '/wp-json/tomcMVXtend/v1/checkIfAssigned',
+                url: tomcMvxtensionData.root_url + '/wp-json/tomcMVXtend/v1/checkIfAssigned',
                 type: 'GET',
                 data: {
                     'ISBNEntered' : Number(isbnEntered)
