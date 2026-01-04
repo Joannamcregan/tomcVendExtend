@@ -82,24 +82,27 @@ class NYPExtension {
         })
     }
     enableSettings(e){
-        $.ajax({
-            beforeSend: (xhr) => {
-                xhr.setRequestHeader('X-WP-Nonce', marketplaceData.nonce);
-            },
-            url: tomcBookorgData.root_url + '/wp-json/tomcMVXtendNYP/v1/enableNYP',
-            type: 'POST',
-            data: {
-                'id' : $(e.target).data('id'),
-                'min' : this.minPriceInput.val(),
-                'max' : this.maxPriceInput.val()
-            },
-            success: (response) => {
-                location.reload(true);
-            },
-            failure: (response) => {
-                //console.log(response);
-            }
-        })
+        if (1+1==2){
+            console.log('if statement');
+            $.ajax({
+                beforeSend: (xhr) => {
+                    xhr.setRequestHeader('X-WP-Nonce', marketplaceData.nonce);
+                },
+                url: tomcBookorgData.root_url + '/wp-json/tomcMVXtendNYP/v1/enableNYP',
+                type: 'POST',
+                data: {
+                    'id' : $(e.target).data('id'),
+                    'min' : this.minPriceInput.val(),
+                    'max' : this.maxPriceInput.val()
+                },
+                success: (response) => {
+                    location.reload(true);
+                },
+                failure: (response) => {
+                    //console.log(response);
+                }
+            })
+        }
     }
     validateMinMax(){
         let allowEnable = true;
