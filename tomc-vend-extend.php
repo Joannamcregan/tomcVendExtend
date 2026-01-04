@@ -16,7 +16,7 @@ class TomcMvxtension {
             'root_url' => get_site_url()
         ));
         add_action('activate_tomc-vend-extend/tomc-vend-extend.php', array($this, 'onActivate'));
-        //add_action('init', array($this, 'onActivate'));
+        add_action('init', array($this, 'registerScripts'));
         add_action('wp_enqueue_scripts', array($this, 'pluginFiles'));
     }	
 
@@ -29,6 +29,10 @@ class TomcMvxtension {
 
     function onActivate() {
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    }
+
+    function registerScripts(){
+        wp_register_style('tomc_mvxtend_styles', plugins_url('css/tomc-mvxtend-styles.css', __FILE__), false, '1.0', 'all');
     }
 }
 
